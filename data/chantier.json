@@ -1,0 +1,132 @@
+{
+  "_lisezmoi": "Suivi de construction de CORTEX. Fichier tenu à la main : passer une tâche à fait:true ici, puis régénérer le Cockpit. Les 7 étapes viennent de docs/00_context/README.md (ordre imposé), leur détail de data.md, integration.md et automatisation.md. Ne rien ajouter qui ne soit pas dans ces documents sans le tracer d'abord dans DECISIONS.md.",
+  "etapes": [
+    {
+      "id": "E1",
+      "bloc": "Airtable",
+      "titre": "Base Airtable lisible en API",
+      "source": "data.md",
+      "depend": [],
+      "taches": [
+        { "t": "Créer la base `CORTEX`", "fait": false },
+        { "t": "Table `Notions` : 11 champs, import du CSV sans transformation", "fait": false },
+        { "t": "Table `Sprints` : 9 champs, 8 lignes", "fait": false },
+        { "t": "Table `Config` versionnée : prompt_systeme, liste_blanche, heure_matin, heure_soir", "fait": false },
+        { "t": "Table `Evenements` en append only", "fait": false },
+        { "t": "Token à portée limitée à cette base", "fait": false },
+        { "t": "Vérifier les 4 vues de data.md en API", "fait": false }
+      ],
+      "secrets": ["AIRTABLE_TOKEN", "AIRTABLE_BASE_ID"]
+    },
+    {
+      "id": "E2",
+      "bloc": "Dashboard",
+      "titre": "Écran de révision en lecture seule",
+      "source": "ecrans.md",
+      "depend": ["E1"],
+      "taches": [
+        { "t": "Route serveur qui lit Airtable, jamais le navigateur", "fait": false },
+        { "t": "Pile de 3 cartes, file du jour triée par ordre", "fait": false },
+        { "t": "Colonne droite : projet, 4 tuiles, rattrapage, flux", "fait": false },
+        { "t": "Trancher le sens des gestes de verdict", "fait": false, "ref": "DEC-004" }
+      ],
+      "secrets": []
+    },
+    {
+      "id": "E3",
+      "bloc": "Dashboard",
+      "titre": "Écriture des verdicts depuis le dashboard",
+      "source": "integration.md",
+      "depend": ["E2"],
+      "taches": [
+        { "t": "`applyVerdict(recordId, verdict, source)`, exemplaire unique", "fait": false },
+        { "t": "Écrit la notion puis une ligne dans Evenements", "fait": false },
+        { "t": "Test d'intégrité : la somme des statuts vaut 192", "fait": false }
+      ],
+      "secrets": []
+    },
+    {
+      "id": "E4",
+      "bloc": "n8n",
+      "titre": "Workflow d'envoi Discord",
+      "source": "automatisation.md",
+      "depend": ["E3"],
+      "taches": [
+        { "t": "`envoi-matin` sans boutons, pour valider le format", "fait": false },
+        { "t": "Vérification HTTP HEAD de chaque lien avant envoi", "fait": false },
+        { "t": "Statut de la notion écrit après le POST Discord réussi, jamais avant", "fait": false },
+        { "t": "Error Workflow : message d'échec, aucune écriture sur la notion", "fait": false },
+        { "t": "Dupliquer en `envoi-soir`", "fait": false },
+        { "t": "Alerte de budget sur l'API Anthropic", "fait": false }
+      ],
+      "secrets": ["ANTHROPIC_API_KEY"]
+    },
+    {
+      "id": "E5",
+      "bloc": "Discord",
+      "titre": "Route d'interaction",
+      "source": "integration.md",
+      "depend": ["E4"],
+      "taches": [
+        { "t": "Application Discord avec bot, salon `#cortex`", "fait": false },
+        { "t": "3 boutons, `custom_id` = verdict:{ok|again|lost}:{recordId}", "fait": false },
+        { "t": "Vérifier la signature Ed25519, sinon 401", "fait": false },
+        { "t": "Répondre type 1 au ping de vérification", "fait": false },
+        { "t": "Répondre sous 3 s, type 5 différé si Airtable traîne", "fait": false },
+        { "t": "Type 7 après traitement : boutons remplacés, plus cliquable deux fois", "fait": false },
+        { "t": "Endpoint déclaré dans le portail développeur", "fait": false }
+      ],
+      "secrets": ["DISCORD_BOT_TOKEN", "DISCORD_PUBLIC_KEY", "DISCORD_CHANNEL_ID", "DISCORD_APPLICATION_ID"]
+    },
+    {
+      "id": "E6",
+      "bloc": "Dashboard",
+      "titre": "Onglet Prompt",
+      "source": "prompt.md",
+      "depend": ["E5"],
+      "taches": [
+        { "t": "Enregistrer crée une version, ne remplace jamais", "fait": false },
+        { "t": "Variables cliquables insérées au curseur", "fait": false },
+        { "t": "Garde-fou règle 8 affiché, non supprimable", "fait": false }
+      ],
+      "secrets": []
+    },
+    {
+      "id": "E7",
+      "bloc": "Dashboard",
+      "titre": "Écran Planning",
+      "source": "ecrans.md",
+      "depend": ["E6"],
+      "taches": [
+        { "t": "Planche 8 x 24, une case par notion", "fait": false },
+        { "t": "Sprint en cours surligné", "fait": false }
+      ],
+      "secrets": []
+    },
+    {
+      "id": "E8",
+      "bloc": "n8n",
+      "titre": "Workflows périodiques",
+      "source": "automatisation.md",
+      "depend": ["E5"],
+      "taches": [
+        { "t": "`revision-hebdo` : quiz du dimanche sur les notions échues", "fait": false },
+        { "t": "`projet-sprint` : brief ou rappel de rendu, une semaine sur deux", "fait": false },
+        { "t": "Un projet non rendu décale le sprint suivant", "fait": false }
+      ],
+      "secrets": []
+    }
+  ],
+  "alertes": [
+    {
+      "niveau": "attention",
+      "t": "Aucune chaîne de la liste blanche ne couvre le sprint 08 (MLOps, architecture, systèmes distribués). Les 24 notions du S08 n'ont pas de source vidéo.",
+      "ref": "prompt.md, règle d'extension de la liste blanche"
+    },
+    {
+      "niveau": "attention",
+      "t": "Le sens des gestes de verdict est l'inverse de la convention des piles de cartes. À trancher avant l'étape E2.",
+      "ref": "DEC-004"
+    }
+  ]
+}

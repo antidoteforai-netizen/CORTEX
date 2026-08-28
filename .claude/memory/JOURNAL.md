@@ -43,3 +43,19 @@ fait / bloque / prochaine action.
   l'étape 2.
 - **Prochaine action** : étape 1 de l'ordre de construction, créer la base Airtable `CORTEX` et y
   importer `data/curriculum-192-notions.csv` tel quel.
+
+## 2026-08-28 (4)
+
+- **Fait** : (1) Les trois chemins de verdict sont vérifiés en navigateur réel, pas relus :
+  glissement souris gauche/bas/droite, flèches clavier, boutons, plus le retour de carte sous le
+  seuil et le glissement démarré dans le texte de la fiche. 9 scénarios, 9 succès, invariant 192
+  tenu à chaque étape. Boutons et en-tête de carte réalignés sur la maquette de référence
+  (centrés, bordure à la couleur du verdict, glyphes ← ↓ →). (2) Onglet « Chantier » ajouté au
+  Cerveau Manager : 8 étapes, 35 tâches, dépendances et alertes, dérivé de `data/chantier.json`
+  (voir DEC-006). (3) Sourçage des 192 notions via `scripts/build-sources.mjs` et
+  `data/sources.json` (voir DEC-005) : 331 URL, tous les hôtes sur liste blanche, 13 sources et
+  5 playlists vérifiées en vrai. Audit de verbosité passé sur les trois surfaces, colophon
+  resserré ; les 8 fiches d'exemple respectent la règle des 250 mots.
+- **Bloqué** : rien. DEC-004 est tranchée (le sens des gestes est confirmé). Reste un trou de
+  sourçage sur le sprint 08, qui demande une décision d'extension de la liste blanche.
+- **Prochaine action** : étape E1 du chantier, créer la base Airtable `CORTEX` et importer le CSV.

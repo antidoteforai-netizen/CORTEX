@@ -1,0 +1,2550 @@
+{
+  "notions": [
+    {
+      "ordre": 1,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Scalaire%2C%20vecteur%2C%20matrice%2C%20tenseur",
+        "requete": "Scalaire, vecteur, matrice, tenseur"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=scalar%20vector%20matrix%20tensor",
+        "requete": "scalar vector matrix tensor"
+      }
+    },
+    {
+      "ordre": 2,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Espace%20vectoriel%2C%20base%2C%20dimension",
+        "requete": "Espace vectoriel, base, dimension"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=vector%20space%20base%20dimension",
+        "requete": "vector space base dimension"
+      }
+    },
+    {
+      "ordre": 3,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Produit%20scalaire%20et%20norme",
+        "requete": "Produit scalaire et norme"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=dot%20product%20norme",
+        "requete": "dot product norme"
+      }
+    },
+    {
+      "ordre": 4,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Produit%20matriciel%20et%20co%C3%BBt%20de%20calcul",
+        "requete": "Produit matriciel et coût de calcul"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=matrix%20multiplication%20cout%20calcul",
+        "requete": "matrix multiplication cout calcul"
+      }
+    },
+    {
+      "ordre": 5,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Transpos%C3%A9e%2C%20inverse%2C%20pseudo-inverse",
+        "requete": "Transposée, inverse, pseudo-inverse"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=transpose%20inverse%20pseudo",
+        "requete": "transpose inverse pseudo"
+      }
+    },
+    {
+      "ordre": 6,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=D%C3%A9terminant%20et%20rang",
+        "requete": "Déterminant et rang"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=determinant%20rang",
+        "requete": "determinant rang"
+      }
+    },
+    {
+      "ordre": 7,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Application%20lin%C3%A9aire%20et%20changement%20de%20base",
+        "requete": "Application linéaire et changement de base"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=linear%20map%20change%20of%20basis",
+        "requete": "linear map change of basis"
+      }
+    },
+    {
+      "ordre": 8,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Valeurs%20propres%20et%20vecteurs%20propres",
+        "requete": "Valeurs propres et vecteurs propres"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=eigenvalues%20eigenvectors",
+        "requete": "eigenvalues eigenvectors"
+      }
+    },
+    {
+      "ordre": 9,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=D%C3%A9composition%20en%20valeurs%20singuli%C3%A8res%20(SVD)",
+        "requete": "Décomposition en valeurs singulières (SVD)"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=singular%20value%20decomposition%20svd",
+        "requete": "singular value decomposition svd"
+      }
+    },
+    {
+      "ordre": 10,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=PCA%20vue%20comme%20une%20rotation",
+        "requete": "PCA vue comme une rotation"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=pca%20rotation",
+        "requete": "pca rotation"
+      }
+    },
+    {
+      "ordre": 11,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Matrices%20creuses%20et%20empreinte%20m%C3%A9moire",
+        "requete": "Matrices creuses et empreinte mémoire"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=sparse%20matrix%20memory%20footprint",
+        "requete": "sparse matrix memory footprint"
+      }
+    },
+    {
+      "ordre": 12,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Broadcasting%20et%20vectorisation%20NumPy",
+        "requete": "Broadcasting et vectorisation NumPy"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=broadcasting%20vectorization%20numpy",
+        "requete": "broadcasting vectorization numpy"
+      }
+    },
+    {
+      "ordre": 13,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Limite%2C%20continuit%C3%A9%2C%20notation%20asymptotique",
+        "requete": "Limite, continuité, notation asymptotique"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=limit%20continuity%20big%20notation",
+        "requete": "limit continuity big notation"
+      }
+    },
+    {
+      "ordre": 14,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=D%C3%A9riv%C3%A9e%20et%20pente%20d'une%20courbe",
+        "requete": "Dérivée et pente d'une courbe"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=derivative%20slope%20courbe",
+        "requete": "derivative slope courbe"
+      }
+    },
+    {
+      "ordre": 15,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=D%C3%A9riv%C3%A9es%20partielles",
+        "requete": "Dérivées partielles"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=partial%20derivatives",
+        "requete": "partial derivatives"
+      }
+    },
+    {
+      "ordre": 16,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Gradient%20et%20direction%20de%20plus%20forte%20pente",
+        "requete": "Gradient et direction de plus forte pente"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=gradient%20steepest%20descent",
+        "requete": "gradient steepest descent"
+      }
+    },
+    {
+      "ordre": 17,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=R%C3%A8gle%20de%20la%20cha%C3%AEne",
+        "requete": "Règle de la chaîne"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=chain%20rule",
+        "requete": "chain rule"
+      }
+    },
+    {
+      "ordre": 18,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Matrice%20jacobienne",
+        "requete": "Matrice jacobienne"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=jacobian%20matrix",
+        "requete": "jacobian matrix"
+      }
+    },
+    {
+      "ordre": 19,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Hessienne%20et%20courbure",
+        "requete": "Hessienne et courbure"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=hessian%20curvature",
+        "requete": "hessian curvature"
+      }
+    },
+    {
+      "ordre": 20,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=D%C3%A9veloppement%20de%20Taylor%20%C3%A0%20l'ordre%202",
+        "requete": "Développement de Taylor à l'ordre 2"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=taylor%20series%20ordre",
+        "requete": "taylor series ordre"
+      }
+    },
+    {
+      "ordre": 21,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Convexit%C3%A9%20et%20unicit%C3%A9%20du%20minimum",
+        "requete": "Convexité et unicité du minimum"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=convexity%20unique%20minimum",
+        "requete": "convexity unique minimum"
+      }
+    },
+    {
+      "ordre": 22,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Diff%C3%A9rentiation%20automatique%2C%20mode%20direct%20et%20inverse",
+        "requete": "Différentiation automatique, mode direct et inverse"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=automatic%20differentiation%20mode%20direct%20inverse",
+        "requete": "automatic differentiation mode direct inverse"
+      }
+    },
+    {
+      "ordre": 23,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Graphe%20de%20calcul",
+        "requete": "Graphe de calcul"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=computational%20graph",
+        "requete": "computational graph"
+      }
+    },
+    {
+      "ordre": 24,
+      "sprint": "S01",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Backpropagation%20comme%20r%C3%A8gle%20de%20la%20cha%C3%AEne%20appliqu%C3%A9e",
+        "requete": "Backpropagation comme règle de la chaîne appliquée"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=backpropagation%20chain%20rule",
+        "requete": "backpropagation chain rule"
+      }
+    },
+    {
+      "ordre": 25,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Espace%20probabilis%C3%A9%2C%20%C3%A9v%C3%A9nement%2C%20ind%C3%A9pendance",
+        "requete": "Espace probabilisé, événement, indépendance"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=espace%20probabilise%20evenement%20independance",
+        "requete": "espace probabilise evenement independance"
+      }
+    },
+    {
+      "ordre": 26,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Probabilit%C3%A9%20conditionnelle",
+        "requete": "Probabilité conditionnelle"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=conditional%20probability",
+        "requete": "conditional probability"
+      }
+    },
+    {
+      "ordre": 27,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Th%C3%A9or%C3%A8me%20de%20Bayes",
+        "requete": "Théorème de Bayes"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=bayes%20theorem",
+        "requete": "bayes theorem"
+      }
+    },
+    {
+      "ordre": 28,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Variables%20al%C3%A9atoires%20discr%C3%A8tes%20et%20continues",
+        "requete": "Variables aléatoires discrètes et continues"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=random%20variables%20discretes%20continues",
+        "requete": "random variables discretes continues"
+      }
+    },
+    {
+      "ordre": 29,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Esp%C3%A9rance%2C%20variance%2C%20%C3%A9cart-type",
+        "requete": "Espérance, variance, écart-type"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=expected%20value%20variance%20standard%20deviation",
+        "requete": "expected value variance standard deviation"
+      }
+    },
+    {
+      "ordre": 30,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Covariance%20et%20corr%C3%A9lation",
+        "requete": "Covariance et corrélation"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=covariance%20correlation",
+        "requete": "covariance correlation"
+      }
+    },
+    {
+      "ordre": 31,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Bernoulli%20et%20binomiale",
+        "requete": "Bernoulli et binomiale"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=bernoulli%20binomiale",
+        "requete": "bernoulli binomiale"
+      }
+    },
+    {
+      "ordre": 32,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Loi%20normale%20et%20th%C3%A9or%C3%A8me%20central%20limite",
+        "requete": "Loi normale et théorème central limite"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=normal%20distribution%20central%20limit%20theorem",
+        "requete": "normal distribution central limit theorem"
+      }
+    },
+    {
+      "ordre": 33,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Poisson%2C%20exponentielle%2C%20uniforme",
+        "requete": "Poisson, exponentielle, uniforme"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=poisson%20exponentielle%20uniforme",
+        "requete": "poisson exponentielle uniforme"
+      }
+    },
+    {
+      "ordre": 34,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Vraisemblance%20et%20maximum%20de%20vraisemblance",
+        "requete": "Vraisemblance et maximum de vraisemblance"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=likelihood%20maximum",
+        "requete": "likelihood maximum"
+      }
+    },
+    {
+      "ordre": 35,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Prior%2C%20posterior%2C%20estimation%20MAP",
+        "requete": "Prior, posterior, estimation MAP"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=prior%20posterior%20estimation%20map",
+        "requete": "prior posterior estimation map"
+      }
+    },
+    {
+      "ordre": 36,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Entropie%2C%20entropie%20crois%C3%A9e%2C%20divergence%20KL",
+        "requete": "Entropie, entropie croisée, divergence KL"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=entropy%20cross%20kl%20divergence",
+        "requete": "entropy cross kl divergence"
+      }
+    },
+    {
+      "ordre": 37,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=%C3%89chantillonnage%20et%20biais%20d'%C3%A9chantillonnage",
+        "requete": "Échantillonnage et biais d'échantillonnage"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=sampling%20bias",
+        "requete": "sampling bias"
+      }
+    },
+    {
+      "ordre": 38,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Intervalle%20de%20confiance",
+        "requete": "Intervalle de confiance"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=confidence%20interval",
+        "requete": "confidence interval"
+      }
+    },
+    {
+      "ordre": 39,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Test%20d'hypoth%C3%A8se%2C%20p-value%2C%20erreurs%20I%20et%20II",
+        "requete": "Test d'hypothèse, p-value, erreurs I et II"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=hypothesis%20testing%20value%20erreurs%20ii",
+        "requete": "hypothesis testing value erreurs ii"
+      }
+    },
+    {
+      "ordre": 40,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=A%2FB%20testing%20et%20puissance%20statistique",
+        "requete": "A/B testing et puissance statistique"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=testing%20statistical%20power",
+        "requete": "testing statistical power"
+      }
+    },
+    {
+      "ordre": 41,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Paradoxe%20de%20Simpson%20et%20causalit%C3%A9",
+        "requete": "Paradoxe de Simpson et causalité"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=paradoxe%20simpson%20causality",
+        "requete": "paradoxe simpson causality"
+      }
+    },
+    {
+      "ordre": 42,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Fonction%20de%20co%C3%BBt%20et%20paysage%20d'erreur",
+        "requete": "Fonction de coût et paysage d'erreur"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=loss%20function%20paysage%20erreur",
+        "requete": "loss function paysage erreur"
+      }
+    },
+    {
+      "ordre": 43,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Descente%20de%20gradient%20batch%2C%20stochastique%2C%20mini-batch",
+        "requete": "Descente de gradient batch, stochastique, mini-batch"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=gradient%20descent%20batch%20stochastique%20mini",
+        "requete": "gradient descent batch stochastique mini"
+      }
+    },
+    {
+      "ordre": 44,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Learning%20rate%20et%20scheduling",
+        "requete": "Learning rate et scheduling"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=learning%20rate%20scheduling",
+        "requete": "learning rate scheduling"
+      }
+    },
+    {
+      "ordre": 45,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Momentum%2C%20RMSProp%2C%20Adam%2C%20AdamW",
+        "requete": "Momentum, RMSProp, Adam, AdamW"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=momentum%20rmsprop%20adam%20adamw",
+        "requete": "momentum rmsprop adam adamw"
+      }
+    },
+    {
+      "ordre": 46,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=R%C3%A9gularisation%20L1%20et%20L2",
+        "requete": "Régularisation L1 et L2"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=regularization%20l1%20l2",
+        "requete": "regularization l1 l2"
+      }
+    },
+    {
+      "ordre": 47,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Minimum%20local%2C%20point-selle%2C%20plateau",
+        "requete": "Minimum local, point-selle, plateau"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=minimum%20local%20saddle%20point%20plateau",
+        "requete": "minimum local saddle point plateau"
+      }
+    },
+    {
+      "ordre": 48,
+      "sprint": "S02",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Optimisation%20sous%20contrainte%20et%20Lagrange",
+        "requete": "Optimisation sous contrainte et Lagrange"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=constrained%20optimization%20lagrange",
+        "requete": "constrained optimization lagrange"
+      }
+    },
+    {
+      "ordre": 49,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Cycle%20de%20vie%20de%20la%20donn%C3%A9e",
+        "requete": "Cycle de vie de la donnée"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=lifecycle%20donnee",
+        "requete": "lifecycle donnee"
+      }
+    },
+    {
+      "ordre": 50,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=OLTP%20et%20OLAP",
+        "requete": "OLTP et OLAP"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=oltp%20olap",
+        "requete": "oltp olap"
+      }
+    },
+    {
+      "ordre": 51,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Mod%C3%A9lisation%20relationnelle%20et%20normalisation",
+        "requete": "Modélisation relationnelle et normalisation"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=relational%20modeling%20normalization",
+        "requete": "relational modeling normalization"
+      }
+    },
+    {
+      "ordre": 52,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=SQL%20%3A%20jointures%2C%20agr%C3%A9gations%2C%20fonctions%20fen%C3%AAtre",
+        "requete": "SQL : jointures, agrégations, fonctions fenêtre"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=sql%20joins%20aggregations%20window%20functions",
+        "requete": "sql joins aggregations window functions"
+      }
+    },
+    {
+      "ordre": 53,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=NoSQL%20%3A%20document%2C%20cl%C3%A9-valeur%2C%20colonne%2C%20graphe",
+        "requete": "NoSQL : document, clé-valeur, colonne, graphe"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=nosql%20document%20key%20value%20column%20graph",
+        "requete": "nosql document key value column graph"
+      }
+    },
+    {
+      "ordre": 54,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Data%20warehouse%2C%20data%20lake%2C%20lakehouse",
+        "requete": "Data warehouse, data lake, lakehouse"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=data%20warehouse%20lake%20lakehouse",
+        "requete": "data warehouse lake lakehouse"
+      }
+    },
+    {
+      "ordre": 55,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=ETL%20et%20ELT",
+        "requete": "ETL et ELT"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=etl%20elt",
+        "requete": "etl elt"
+      }
+    },
+    {
+      "ordre": 56,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Orchestration%20et%20DAG%20(Airflow%2C%20Dagster)",
+        "requete": "Orchestration et DAG (Airflow, Dagster)"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=orchestration%20dag%20airflow%20dagster",
+        "requete": "orchestration dag airflow dagster"
+      }
+    },
+    {
+      "ordre": 57,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Batch%20et%20streaming%2C%20architecture%20%C3%A9v%C3%A9nementielle",
+        "requete": "Batch et streaming, architecture événementielle"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=batch%20streaming%20event%20driven%20architecture",
+        "requete": "batch streaming event driven architecture"
+      }
+    },
+    {
+      "ordre": 58,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Idempotence%20et%20rejouabilit%C3%A9%20d'un%20pipeline",
+        "requete": "Idempotence et rejouabilité d'un pipeline"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=idempotence%20replayability%20pipeline",
+        "requete": "idempotence replayability pipeline"
+      }
+    },
+    {
+      "ordre": 59,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Partitionnement%20et%20formats%20colonnes%20(Parquet)",
+        "requete": "Partitionnement et formats colonnes (Parquet)"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=partitioning%20formats%20column%20parquet",
+        "requete": "partitioning formats column parquet"
+      }
+    },
+    {
+      "ordre": 60,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Data%20contract%20et%20%C3%A9volution%20de%20sch%C3%A9ma",
+        "requete": "Data contract et évolution de schéma"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=data%20contract%20schema%20evolution",
+        "requete": "data contract schema evolution"
+      }
+    },
+    {
+      "ordre": 61,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Qualit%C3%A9%20de%20donn%C3%A9es%20%3A%20compl%C3%A9tude%2C%20fra%C3%AEcheur%2C%20unicit%C3%A9",
+        "requete": "Qualité de données : complétude, fraîcheur, unicité"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=data%20quality%20completeness%20freshness%20uniqueness",
+        "requete": "data quality completeness freshness uniqueness"
+      }
+    },
+    {
+      "ordre": 62,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Data%20lineage%20et%20catalogage",
+        "requete": "Data lineage et catalogage"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=data%20lineage%20catalog",
+        "requete": "data lineage catalog"
+      }
+    },
+    {
+      "ordre": 63,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=RGPD%2C%20minimisation%2C%20anonymisation%2C%20pseudonymisation",
+        "requete": "RGPD, minimisation, anonymisation, pseudonymisation"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=rgpd%20minimisation%20anonymization%20pseudonymization",
+        "requete": "rgpd minimisation anonymization pseudonymization"
+      }
+    },
+    {
+      "ordre": 64,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Valeurs%20manquantes%20et%20strat%C3%A9gies%20d'imputation",
+        "requete": "Valeurs manquantes et stratégies d'imputation"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=missing%20values%20imputation",
+        "requete": "missing values imputation"
+      }
+    },
+    {
+      "ordre": 65,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=D%C3%A9tection%20et%20traitement%20des%20valeurs%20aberrantes",
+        "requete": "Détection et traitement des valeurs aberrantes"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=detection%20traitement%20outliers",
+        "requete": "detection traitement outliers"
+      }
+    },
+    {
+      "ordre": 66,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Normalisation%2C%20standardisation%2C%20mise%20%C3%A0%20l'%C3%A9chelle%20robuste",
+        "requete": "Normalisation, standardisation, mise à l'échelle robuste"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=normalization%20standardization%20robust%20scaling",
+        "requete": "normalization standardization robust scaling"
+      }
+    },
+    {
+      "ordre": 67,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Encodage%20cat%C3%A9goriel%20%3A%20one-hot%2C%20ordinal%2C%20target",
+        "requete": "Encodage catégoriel : one-hot, ordinal, target"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=categorical%20encoding%20one%20hot%20ordinal%20target",
+        "requete": "categorical encoding one hot ordinal target"
+      }
+    },
+    {
+      "ordre": 68,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Feature%20engineering%20et%20variables%20temporelles",
+        "requete": "Feature engineering et variables temporelles"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=feature%20engineering%20time%20features",
+        "requete": "feature engineering time features"
+      }
+    },
+    {
+      "ordre": 69,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=R%C3%A9duction%20de%20dimension%20%3A%20PCA%2C%20t-SNE%2C%20UMAP",
+        "requete": "Réduction de dimension : PCA, t-SNE, UMAP"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=dimensionality%20reduction%20pca%20sne%20umap",
+        "requete": "dimensionality reduction pca sne umap"
+      }
+    },
+    {
+      "ordre": 70,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=D%C3%A9s%C3%A9quilibre%20de%20classes%2C%20SMOTE%2C%20pond%C3%A9ration",
+        "requete": "Déséquilibre de classes, SMOTE, pondération"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=class%20imbalance%20smote%20weighting",
+        "requete": "class imbalance smote weighting"
+      }
+    },
+    {
+      "ordre": 71,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Fuite%20de%20donn%C3%A9es%20(data%20leakage)",
+        "requete": "Fuite de données (data leakage)"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=data%20leakage",
+        "requete": "data leakage"
+      }
+    },
+    {
+      "ordre": 72,
+      "sprint": "S03",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Split%20train%20%2F%20validation%20%2F%20test%20et%20validation%20crois%C3%A9e",
+        "requete": "Split train / validation / test et validation croisée"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=split%20train%20validation%20test%20cross",
+        "requete": "split train validation test cross"
+      }
+    },
+    {
+      "ordre": 73,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Supervis%C3%A9%2C%20non%20supervis%C3%A9%2C%20semi-supervis%C3%A9",
+        "requete": "Supervisé, non supervisé, semi-supervisé"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=supervised%20unsupervised%20semi",
+        "requete": "supervised unsupervised semi"
+      }
+    },
+    {
+      "ordre": 74,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Compromis%20biais-variance",
+        "requete": "Compromis biais-variance"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=bias%20variance%20tradeoff",
+        "requete": "bias variance tradeoff"
+      }
+    },
+    {
+      "ordre": 75,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Sur-apprentissage%20et%20sous-apprentissage",
+        "requete": "Sur-apprentissage et sous-apprentissage"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=overfitting%20underfitting",
+        "requete": "overfitting underfitting"
+      }
+    },
+    {
+      "ordre": 76,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=R%C3%A9gression%20lin%C3%A9aire%20simple%20et%20multiple",
+        "requete": "Régression linéaire simple et multiple"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=regression%20lineaire",
+        "requete": "regression lineaire"
+      }
+    },
+    {
+      "ordre": 77,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Moindres%20carr%C3%A9s%20et%20solution%20analytique",
+        "requete": "Moindres carrés et solution analytique"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=least%20squares%20closed%20form%20solution",
+        "requete": "least squares closed form solution"
+      }
+    },
+    {
+      "ordre": 78,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Ridge%2C%20Lasso%2C%20ElasticNet",
+        "requete": "Ridge, Lasso, ElasticNet"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=ridge%20lasso%20elasticnet",
+        "requete": "ridge lasso elasticnet"
+      }
+    },
+    {
+      "ordre": 79,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=R%C3%A9gression%20logistique%20et%20sigmo%C3%AFde",
+        "requete": "Régression logistique et sigmoïde"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=regression%20logistique%20sigmoide",
+        "requete": "regression logistique sigmoide"
+      }
+    },
+    {
+      "ordre": 80,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Fronti%C3%A8re%20de%20d%C3%A9cision",
+        "requete": "Frontière de décision"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=decision%20boundary",
+        "requete": "decision boundary"
+      }
+    },
+    {
+      "ordre": 81,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Matrice%20de%20confusion",
+        "requete": "Matrice de confusion"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=confusion%20matrix",
+        "requete": "confusion matrix"
+      }
+    },
+    {
+      "ordre": 82,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Pr%C3%A9cision%2C%20rappel%2C%20F1",
+        "requete": "Précision, rappel, F1"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=precision%20rappel%20f1",
+        "requete": "precision rappel f1"
+      }
+    },
+    {
+      "ordre": 83,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=ROC%2C%20AUC%2C%20courbe%20pr%C3%A9cision-rappel",
+        "requete": "ROC, AUC, courbe précision-rappel"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=roc%20auc%20courbe%20precision%20rappel",
+        "requete": "roc auc courbe precision rappel"
+      }
+    },
+    {
+      "ordre": 84,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=MAE%2C%20RMSE%2C%20R%C2%B2%20et%20leurs%20pi%C3%A8ges",
+        "requete": "MAE, RMSE, R² et leurs pièges"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=mae%20rmse%20r%C2%B2%20pitfalls",
+        "requete": "mae rmse r² pitfalls"
+      }
+    },
+    {
+      "ordre": 85,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Arbre%20de%20d%C3%A9cision%2C%20entropie%20et%20Gini",
+        "requete": "Arbre de décision, entropie et Gini"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=decision%20tree%20entropy%20gini",
+        "requete": "decision tree entropy gini"
+      }
+    },
+    {
+      "ordre": 86,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Profondeur%20et%20%C3%A9lagage",
+        "requete": "Profondeur et élagage"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=tree%20depth%20pruning",
+        "requete": "tree depth pruning"
+      }
+    },
+    {
+      "ordre": 87,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Bagging%20et%20Random%20Forest",
+        "requete": "Bagging et Random Forest"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=bagging%20random%20forest",
+        "requete": "bagging random forest"
+      }
+    },
+    {
+      "ordre": 88,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Boosting%20%3A%20AdaBoost%2C%20Gradient%20Boosting",
+        "requete": "Boosting : AdaBoost, Gradient Boosting"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=boosting%20adaboost%20gradient",
+        "requete": "boosting adaboost gradient"
+      }
+    },
+    {
+      "ordre": 89,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=XGBoost%2C%20LightGBM%2C%20CatBoost",
+        "requete": "XGBoost, LightGBM, CatBoost"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=xgboost%20lightgbm%20catboost",
+        "requete": "xgboost lightgbm catboost"
+      }
+    },
+    {
+      "ordre": 90,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=SVM%20et%20notion%20de%20marge",
+        "requete": "SVM et notion de marge"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=svm%20margin",
+        "requete": "svm margin"
+      }
+    },
+    {
+      "ordre": 91,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Astuce%20du%20noyau%20(kernel%20trick)",
+        "requete": "Astuce du noyau (kernel trick)"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=kernel%20trick",
+        "requete": "kernel trick"
+      }
+    },
+    {
+      "ordre": 92,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=k%20plus%20proches%20voisins",
+        "requete": "k plus proches voisins"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=nearest%20neighbors",
+        "requete": "nearest neighbors"
+      }
+    },
+    {
+      "ordre": 93,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Naive%20Bayes",
+        "requete": "Naive Bayes"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=naive%20bayes",
+        "requete": "naive bayes"
+      }
+    },
+    {
+      "ordre": 94,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=K-means%20et%20m%C3%A9thode%20du%20coude",
+        "requete": "K-means et méthode du coude"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=means%20elbow%20method",
+        "requete": "means elbow method"
+      }
+    },
+    {
+      "ordre": 95,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Clustering%20hi%C3%A9rarchique%20et%20DBSCAN",
+        "requete": "Clustering hiérarchique et DBSCAN"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=hierarchical%20clustering%20dbscan",
+        "requete": "hierarchical clustering dbscan"
+      }
+    },
+    {
+      "ordre": 96,
+      "sprint": "S04",
+      "fr": {
+        "label": "Machine Learnia",
+        "url": "https://www.youtube.com/@MachineLearnia/search?query=Interpr%C3%A9tabilit%C3%A9%20%3A%20importance%20des%20variables%2C%20SHAP%2C%20LIME",
+        "requete": "Interprétabilité : importance des variables, SHAP, LIME"
+      },
+      "en": {
+        "label": "StatQuest",
+        "url": "https://www.youtube.com/@statquest/search?query=interpretability%20feature%20importance%20shap%20lime",
+        "requete": "interpretability feature importance shap lime"
+      }
+    },
+    {
+      "ordre": 97,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Neurone%20formel%20et%20perceptron",
+        "requete": "Neurone formel et perceptron"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=artificial%20neuron%20perceptron",
+        "requete": "artificial neuron perceptron"
+      }
+    },
+    {
+      "ordre": 98,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Perceptron%20multicouche",
+        "requete": "Perceptron multicouche"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=multilayer%20perceptron",
+        "requete": "multilayer perceptron"
+      }
+    },
+    {
+      "ordre": 99,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Activations%20%3A%20ReLU%2C%20GELU%2C%20sigmo%C3%AFde%2C%20tanh",
+        "requete": "Activations : ReLU, GELU, sigmoïde, tanh"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=activation%20functions%20relu%20gelu%20sigmoide%20tanh",
+        "requete": "activation functions relu gelu sigmoide tanh"
+      }
+    },
+    {
+      "ordre": 100,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Initialisation%20des%20poids%20%3A%20Xavier%2C%20He",
+        "requete": "Initialisation des poids : Xavier, He"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=weight%20initialization%20xavier%20he",
+        "requete": "weight initialization xavier he"
+      }
+    },
+    {
+      "ordre": 101,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Forward%20pass%20et%20backward%20pass",
+        "requete": "Forward pass et backward pass"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=forward%20pass%20backward",
+        "requete": "forward pass backward"
+      }
+    },
+    {
+      "ordre": 102,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Fonctions%20de%20perte%20usuelles%20en%20DL",
+        "requete": "Fonctions de perte usuelles en DL"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=loss%20functions%20dl",
+        "requete": "loss functions dl"
+      }
+    },
+    {
+      "ordre": 103,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Batch%20norm%20et%20layer%20norm",
+        "requete": "Batch norm et layer norm"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=batch%20norm%20layer",
+        "requete": "batch norm layer"
+      }
+    },
+    {
+      "ordre": 104,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Dropout%20et%20r%C3%A9gularisation%20en%20DL",
+        "requete": "Dropout et régularisation en DL"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=dropout%20regularization%20dl",
+        "requete": "dropout regularization dl"
+      }
+    },
+    {
+      "ordre": 105,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Gradients%20qui%20s'%C3%A9vanouissent%20ou%20explosent",
+        "requete": "Gradients qui s'évanouissent ou explosent"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=vanishing%20exploding%20gradient",
+        "requete": "vanishing exploding gradient"
+      }
+    },
+    {
+      "ordre": 106,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Gradient%20clipping",
+        "requete": "Gradient clipping"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=gradient%20clipping",
+        "requete": "gradient clipping"
+      }
+    },
+    {
+      "ordre": 107,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Convolution%20%3A%20noyau%2C%20stride%2C%20padding",
+        "requete": "Convolution : noyau, stride, padding"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=convolution%20noyau%20stride%20padding",
+        "requete": "convolution noyau stride padding"
+      }
+    },
+    {
+      "ordre": 108,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Pooling%20et%20champ%20r%C3%A9ceptif",
+        "requete": "Pooling et champ réceptif"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=pooling%20receptive%20field",
+        "requete": "pooling receptive field"
+      }
+    },
+    {
+      "ordre": 109,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=LeNet%2C%20ResNet%2C%20connexions%20r%C3%A9siduelles",
+        "requete": "LeNet, ResNet, connexions résiduelles"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=lenet%20resnet%20residual%20connections",
+        "requete": "lenet resnet residual connections"
+      }
+    },
+    {
+      "ordre": 110,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Transfer%20learning%20et%20fine-tuning",
+        "requete": "Transfer learning et fine-tuning"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=transfer%20learning%20fine%20tuning",
+        "requete": "transfer learning fine tuning"
+      }
+    },
+    {
+      "ordre": 111,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Augmentation%20de%20donn%C3%A9es",
+        "requete": "Augmentation de données"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=data%20augmentation",
+        "requete": "data augmentation"
+      }
+    },
+    {
+      "ordre": 112,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=RNN%20et%20d%C3%A9pendance%20temporelle",
+        "requete": "RNN et dépendance temporelle"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=rnn%20recurrent%20neural%20network",
+        "requete": "rnn recurrent neural network"
+      }
+    },
+    {
+      "ordre": 113,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=LSTM%20%3A%20portes%20d'oubli%2C%20d'entr%C3%A9e%2C%20de%20sortie",
+        "requete": "LSTM : portes d'oubli, d'entrée, de sortie"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=lstm%20gates",
+        "requete": "lstm gates"
+      }
+    },
+    {
+      "ordre": 114,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=GRU%20et%20arbitrage%20co%C3%BBt%20%2F%20performance",
+        "requete": "GRU et arbitrage coût / performance"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=gru%20arbitrage%20cout%20performance",
+        "requete": "gru arbitrage cout performance"
+      }
+    },
+    {
+      "ordre": 115,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Seq2seq%20et%20encodeur-d%C3%A9codeur",
+        "requete": "Seq2seq et encodeur-décodeur"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=seq2seq%20encodeur%20decodeur",
+        "requete": "seq2seq encodeur decodeur"
+      }
+    },
+    {
+      "ordre": 116,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Autoencodeur%20et%20espace%20latent",
+        "requete": "Autoencodeur et espace latent"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=autoencoder%20latent%20space",
+        "requete": "autoencoder latent space"
+      }
+    },
+    {
+      "ordre": 117,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Autoencodeur%20variationnel%20(VAE)",
+        "requete": "Autoencodeur variationnel (VAE)"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=variational%20autoencoder%20vae",
+        "requete": "variational autoencoder vae"
+      }
+    },
+    {
+      "ordre": 118,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=GAN%20%3A%20g%C3%A9n%C3%A9rateur%2C%20discriminateur%2C%20effondrement%20de%20mode",
+        "requete": "GAN : générateur, discriminateur, effondrement de mode"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=gan%20generateur%20discriminateur%20mode%20collapse",
+        "requete": "gan generateur discriminateur mode collapse"
+      }
+    },
+    {
+      "ordre": 119,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Mod%C3%A8les%20de%20diffusion%2C%20le%20principe",
+        "requete": "Modèles de diffusion, le principe"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=diffusion%20models%20principe",
+        "requete": "diffusion models principe"
+      }
+    },
+    {
+      "ordre": 120,
+      "sprint": "S05",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Embeddings%20et%20espaces%20de%20repr%C3%A9sentation",
+        "requete": "Embeddings et espaces de représentation"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=embeddings%20embedding%20space",
+        "requete": "embeddings embedding space"
+      }
+    },
+    {
+      "ordre": 121,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=M%C3%A9canisme%20d'attention",
+        "requete": "Mécanisme d'attention"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=attention%20mechanism",
+        "requete": "attention mechanism"
+      }
+    },
+    {
+      "ordre": 122,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Self-attention%20%3A%20query%2C%20key%2C%20value",
+        "requete": "Self-attention : query, key, value"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=self%20attention%20query%20key%20value",
+        "requete": "self attention query key value"
+      }
+    },
+    {
+      "ordre": 123,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Attention%20multi-t%C3%AAtes",
+        "requete": "Attention multi-têtes"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=multi%20head%20attention",
+        "requete": "multi head attention"
+      }
+    },
+    {
+      "ordre": 124,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Encodage%20positionnel%2C%20absolu%20et%20RoPE",
+        "requete": "Encodage positionnel, absolu et RoPE"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=positional%20encoding%20absolute%20rope",
+        "requete": "positional encoding absolute rope"
+      }
+    },
+    {
+      "ordre": 125,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Architecture%20Transformer%20compl%C3%A8te",
+        "requete": "Architecture Transformer complète"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=architecture%20transformer%20complete",
+        "requete": "architecture transformer complete"
+      }
+    },
+    {
+      "ordre": 126,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Encoder-only%2C%20decoder-only%2C%20encoder-decoder",
+        "requete": "Encoder-only, decoder-only, encoder-decoder"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=encoder%20only%20decoder",
+        "requete": "encoder only decoder"
+      }
+    },
+    {
+      "ordre": 127,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Tokenisation%20%3A%20BPE%2C%20SentencePiece",
+        "requete": "Tokenisation : BPE, SentencePiece"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=tokenization%20bpe%20sentencepiece",
+        "requete": "tokenization bpe sentencepiece"
+      }
+    },
+    {
+      "ordre": 128,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Pr%C3%A9-entra%C3%AEnement%20et%20objectif%20de%20langage",
+        "requete": "Pré-entraînement et objectif de langage"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=pretraining%20language%20modeling%20objective",
+        "requete": "pretraining language modeling objective"
+      }
+    },
+    {
+      "ordre": 129,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Lois%20d'%C3%A9chelle%20(scaling%20laws)",
+        "requete": "Lois d'échelle (scaling laws)"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=scaling%20laws",
+        "requete": "scaling laws"
+      }
+    },
+    {
+      "ordre": 130,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Fine-tuning%20supervis%C3%A9%20(SFT)",
+        "requete": "Fine-tuning supervisé (SFT)"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=supervised%20fine%20tuning%20sft",
+        "requete": "supervised fine tuning sft"
+      }
+    },
+    {
+      "ordre": 131,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=LoRA%2C%20QLoRA%2C%20PEFT",
+        "requete": "LoRA, QLoRA, PEFT"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=lora%20qlora%20peft",
+        "requete": "lora qlora peft"
+      }
+    },
+    {
+      "ordre": 132,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Quantization%20%3A%20INT8%2C%20INT4%2C%20GGUF",
+        "requete": "Quantization : INT8, INT4, GGUF"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=quantization%20int8%20int4%20gguf",
+        "requete": "quantization int8 int4 gguf"
+      }
+    },
+    {
+      "ordre": 133,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Distillation%20de%20mod%C3%A8le",
+        "requete": "Distillation de modèle"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=model%20distillation",
+        "requete": "model distillation"
+      }
+    },
+    {
+      "ordre": 134,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Mixture%20of%20Experts",
+        "requete": "Mixture of Experts"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=mixture%20of%20experts",
+        "requete": "mixture of experts"
+      }
+    },
+    {
+      "ordre": 135,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Fen%C3%AAtre%20de%20contexte%20et%20attention%20longue",
+        "requete": "Fenêtre de contexte et attention longue"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=context%20window%20long%20attention",
+        "requete": "context window long attention"
+      }
+    },
+    {
+      "ordre": 136,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=MDP%20%3A%20%C3%A9tat%2C%20action%2C%20r%C3%A9compense%2C%20politique",
+        "requete": "MDP : état, action, récompense, politique"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=mdp%20etat%20action%20reward%20policy",
+        "requete": "mdp etat action reward policy"
+      }
+    },
+    {
+      "ordre": 137,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Fonction%20de%20valeur%20et%20%C3%A9quation%20de%20Bellman",
+        "requete": "Fonction de valeur et équation de Bellman"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=value%20function%20bellman%20equation",
+        "requete": "value function bellman equation"
+      }
+    },
+    {
+      "ordre": 138,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Q-learning%20et%20Deep%20Q-Network",
+        "requete": "Q-learning et Deep Q-Network"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=learning%20deep%20network",
+        "requete": "learning deep network"
+      }
+    },
+    {
+      "ordre": 139,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Policy%20gradient%20et%20REINFORCE",
+        "requete": "Policy gradient et REINFORCE"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=policy%20gradient%20reinforce",
+        "requete": "policy gradient reinforce"
+      }
+    },
+    {
+      "ordre": 140,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Actor-critic%20et%20PPO",
+        "requete": "Actor-critic et PPO"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=actor%20critic%20ppo",
+        "requete": "actor critic ppo"
+      }
+    },
+    {
+      "ordre": 141,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Exploration%20et%20exploitation",
+        "requete": "Exploration et exploitation"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=exploration%20exploitation",
+        "requete": "exploration exploitation"
+      }
+    },
+    {
+      "ordre": 142,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=RLHF%20et%20mod%C3%A8le%20de%20r%C3%A9compense",
+        "requete": "RLHF et modèle de récompense"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=rlhf%20reward%20model",
+        "requete": "rlhf reward model"
+      }
+    },
+    {
+      "ordre": 143,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=DPO%20et%20alternatives%20au%20RLHF",
+        "requete": "DPO et alternatives au RLHF"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=dpo%20alternatives%20rlhf",
+        "requete": "dpo alternatives rlhf"
+      }
+    },
+    {
+      "ordre": 144,
+      "sprint": "S06",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Alignement%2C%20red%20teaming%2C%20jailbreak",
+        "requete": "Alignement, red teaming, jailbreak"
+      },
+      "en": {
+        "label": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown/search?query=alignment%20red%20teaming%20jailbreak",
+        "requete": "alignment red teaming jailbreak"
+      }
+    },
+    {
+      "ordre": 145,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Anatomie%20d'une%20requ%C3%AAte%20LLM%20%3A%20prompt%2C%20compl%C3%A9tion%2C%20tokens",
+        "requete": "Anatomie d'une requête LLM : prompt, complétion, tokens"
+      },
+      "en": null
+    },
+    {
+      "ordre": 146,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Temp%C3%A9rature%2C%20top-p%2C%20top-k%2C%20sampling",
+        "requete": "Température, top-p, top-k, sampling"
+      },
+      "en": null
+    },
+    {
+      "ordre": 147,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Prompting%20structur%C3%A9%20et%20few-shot",
+        "requete": "Prompting structuré et few-shot"
+      },
+      "en": null
+    },
+    {
+      "ordre": 148,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Chain%20of%20thought%20et%20raisonnement%20explicite",
+        "requete": "Chain of thought et raisonnement explicite"
+      },
+      "en": null
+    },
+    {
+      "ordre": 149,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Sortie%20structur%C3%A9e%20et%20function%20calling",
+        "requete": "Sortie structurée et function calling"
+      },
+      "en": null
+    },
+    {
+      "ordre": 150,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Embeddings%20de%20texte%20et%20similarit%C3%A9%20cosinus",
+        "requete": "Embeddings de texte et similarité cosinus"
+      },
+      "en": null
+    },
+    {
+      "ordre": 151,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Bases%20vectorielles%20%3A%20index%20HNSW%2C%20IVF",
+        "requete": "Bases vectorielles : index HNSW, IVF"
+      },
+      "en": null
+    },
+    {
+      "ordre": 152,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Chunking%20%3A%20taille%2C%20recouvrement%2C%20strat%C3%A9gies",
+        "requete": "Chunking : taille, recouvrement, stratégies"
+      },
+      "en": null
+    },
+    {
+      "ordre": 153,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=RAG%20na%C3%AFf%20%3A%20ingestion%2C%20retrieval%2C%20g%C3%A9n%C3%A9ration",
+        "requete": "RAG naïf : ingestion, retrieval, génération"
+      },
+      "en": null
+    },
+    {
+      "ordre": 154,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Recherche%20hybride%20BM25%20%2B%20vectoriel",
+        "requete": "Recherche hybride BM25 + vectoriel"
+      },
+      "en": null
+    },
+    {
+      "ordre": 155,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Reranking%20et%20cross-encoders",
+        "requete": "Reranking et cross-encoders"
+      },
+      "en": null
+    },
+    {
+      "ordre": 156,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=RAG%20agentique%20et%20r%C3%A9%C3%A9criture%20de%20requ%C3%AAte",
+        "requete": "RAG agentique et réécriture de requête"
+      },
+      "en": null
+    },
+    {
+      "ordre": 157,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=GraphRAG%20et%20RAG%20structur%C3%A9",
+        "requete": "GraphRAG et RAG structuré"
+      },
+      "en": null
+    },
+    {
+      "ordre": 158,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=%C3%89valuation%20d'un%20RAG%20%3A%20RAGAS%2C%20groundedness%2C%20recall",
+        "requete": "Évaluation d'un RAG : RAGAS, groundedness, recall"
+      },
+      "en": null
+    },
+    {
+      "ordre": 159,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Hallucination%20%3A%20causes%20et%20att%C3%A9nuation",
+        "requete": "Hallucination : causes et atténuation"
+      },
+      "en": null
+    },
+    {
+      "ordre": 160,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=M%C3%A9moire%20court%20terme%2C%20long%20terme%2C%20%C3%A9pisodique",
+        "requete": "Mémoire court terme, long terme, épisodique"
+      },
+      "en": null
+    },
+    {
+      "ordre": 161,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Compaction%20et%20r%C3%A9sum%C3%A9%20de%20contexte",
+        "requete": "Compaction et résumé de contexte"
+      },
+      "en": null
+    },
+    {
+      "ordre": 162,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Context%20engineering%20et%20budget%20de%20contexte",
+        "requete": "Context engineering et budget de contexte"
+      },
+      "en": null
+    },
+    {
+      "ordre": 163,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Boucle%20d'agent%20%3A%20outils%2C%20planification%2C%20arr%C3%AAt",
+        "requete": "Boucle d'agent : outils, planification, arrêt"
+      },
+      "en": null
+    },
+    {
+      "ordre": 164,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Multi-agents%20et%20orchestration",
+        "requete": "Multi-agents et orchestration"
+      },
+      "en": null
+    },
+    {
+      "ordre": 165,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Sandboxing%20et%20ex%C3%A9cution%20de%20code%20non%20fiable",
+        "requete": "Sandboxing et exécution de code non fiable"
+      },
+      "en": null
+    },
+    {
+      "ordre": 166,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Observabilit%C3%A9%20LLM%20%3A%20traces%2C%20spans%2C%20LLM-as-judge",
+        "requete": "Observabilité LLM : traces, spans, LLM-as-judge"
+      },
+      "en": null
+    },
+    {
+      "ordre": 167,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Co%C3%BBt%20d'inf%C3%A9rence%20%3A%20tokens%2C%20cache%2C%20batching%2C%20latence",
+        "requete": "Coût d'inférence : tokens, cache, batching, latence"
+      },
+      "en": null
+    },
+    {
+      "ordre": 168,
+      "sprint": "S07",
+      "fr": {
+        "label": "Thibault Neveu",
+        "url": "https://www.youtube.com/@ThibaultNeveu/search?query=Injection%20de%20prompt%20et%20s%C3%A9curit%C3%A9%20des%20agents",
+        "requete": "Injection de prompt et sécurité des agents"
+      },
+      "en": null
+    },
+    {
+      "ordre": 169,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 170,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 171,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 172,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 173,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 174,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 175,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 176,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 177,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 178,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 179,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 180,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 181,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 182,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 183,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 184,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 185,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 186,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 187,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 188,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 189,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 190,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 191,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    },
+    {
+      "ordre": 192,
+      "sprint": "S08",
+      "fr": null,
+      "en": null
+    }
+  ],
+  "sprints": [
+    {
+      "id": "S01",
+      "chaineFr": "Machine Learnia",
+      "chaineEn": "3Blue1Brown",
+      "playlists": [
+        {
+          "label": "Essence of linear algebra",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"
+        },
+        {
+          "label": "Essence of calculus",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"
+        }
+      ],
+      "docs": [
+        {
+          "label": "scikit-learn",
+          "url": "https://scikit-learn.org"
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "chaineFr": "Machine Learnia",
+      "chaineEn": "StatQuest",
+      "playlists": [
+        {
+          "label": "Statistics Fundamentals",
+          "url": "https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9"
+        }
+      ],
+      "docs": [
+        {
+          "label": "scikit-learn",
+          "url": "https://scikit-learn.org"
+        },
+        {
+          "label": "Google ML",
+          "url": "https://developers.google.com/machine-learning"
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "chaineFr": "Machine Learnia",
+      "chaineEn": "StatQuest",
+      "playlists": [],
+      "docs": [
+        {
+          "label": "Made With ML",
+          "url": "https://madewithml.com"
+        },
+        {
+          "label": "Google ML",
+          "url": "https://developers.google.com/machine-learning"
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "chaineFr": "Machine Learnia",
+      "chaineEn": "StatQuest",
+      "playlists": [],
+      "docs": [
+        {
+          "label": "scikit-learn",
+          "url": "https://scikit-learn.org"
+        },
+        {
+          "label": "Google ML",
+          "url": "https://developers.google.com/machine-learning"
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "chaineFr": "Thibault Neveu",
+      "chaineEn": "3Blue1Brown",
+      "playlists": [
+        {
+          "label": "Neural networks",
+          "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"
+        }
+      ],
+      "docs": [
+        {
+          "label": "karpathy.ai",
+          "url": "https://karpathy.ai"
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "chaineFr": "Thibault Neveu",
+      "chaineEn": "3Blue1Brown",
+      "playlists": [
+        {
+          "label": "Neural Networks: Zero to Hero",
+          "url": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ"
+        }
+      ],
+      "docs": [
+        {
+          "label": "Jay Alammar",
+          "url": "https://jalammar.github.io"
+        },
+        {
+          "label": "karpathy.ai",
+          "url": "https://karpathy.ai"
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "chaineFr": "Thibault Neveu",
+      "chaineEn": null,
+      "playlists": [],
+      "docs": [
+        {
+          "label": "Lilian Weng",
+          "url": "https://lilianweng.github.io"
+        },
+        {
+          "label": "Hugging Face Learn",
+          "url": "https://huggingface.co/learn"
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "chaineFr": null,
+      "chaineEn": null,
+      "playlists": [],
+      "docs": [
+        {
+          "label": "Made With ML",
+          "url": "https://madewithml.com"
+        },
+        {
+          "label": "Google ML",
+          "url": "https://developers.google.com/machine-learning"
+        }
+      ]
+    }
+  ]
+}
