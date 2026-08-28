@@ -74,3 +74,48 @@ supprimer ; marquer `[REMPLACÉE PAR DEC-XXX]` si obsolète.
   l'utilisatrice, pas à l'implémentation.
 - **Conséquences** : à trancher avant l'étape 2 de l'ordre de construction. Inverser plus tard
   coûte une ligne dans le gestionnaire de glissement et deux libellés, rien de plus.
+- **2026-08-28, confirmé** : l'utilisatrice a redemandé explicitement ce sens (Compris = flèche
+  gauche, À revoir = flèche bas, Perdue = flèche droite). Les neuf chemins d'entrée sont vérifiés
+  en navigateur réel (glissement souris, clavier, boutons, plus le retour sous le seuil et le
+  glissement démarré dans le texte de la fiche). La question reste listée dans le chantier tant
+  que l'étape E2 n'est pas construite, mais la décision est prise.
+
+## DEC-005 — Sourcer les 192 notions sans jamais fabriquer d'URL de vidéo
+
+- **Date** : 2026-08-28
+- **Contexte** : chaque notion doit pointer vers des ressources, dont des vidéos YouTube. Or la
+  règle 8 du prompt système interdit d'inventer une URL, et aucun agent ne peut vérifier 192
+  identifiants de vidéo ni garantir qu'ils survivront quatre mois.
+- **Options envisagées** : (a) écrire un identifiant de vidéo par notion ; (b) ne donner que les
+  racines de chaînes ; (c) une recherche YouTube limitée à une chaîne de la liste blanche, plus
+  les playlists canoniques vérifiées.
+- **Choix** : (c). `scripts/build-sources.mjs` produit `data/sources.json` : par notion, une
+  recherche `youtube.com/@chaine/search?query=<notion>` sur la chaîne FR et sur la chaîne EN du
+  sprint ; par sprint, les playlists canoniques et les docs.
+- **Raisonnement** : (a) est une fabrication déguisée, exactement ce que la règle 8 proscrit, et
+  se périme. (b) ne traite pas la notion. (c) donne une URL qui ne peut pas pointer vers une vidéo
+  supprimée, tout en ciblant la notion exacte. Les 5 playlists profondes sont les seules URL
+  précises : chacune est vérifiée par le **titre réel** de sa page, pas par son code HTTP (YouTube
+  répond 200 même sur une playlist inexistante, contrôle fait avec un faux identifiant).
+- **Conséquences** : la requête EN est dérivée du titre français par un glossaire explicite dans
+  le script, auditable et corrigeable ; zéro mot français ne subsiste dans les 144 requêtes
+  anglaises. Le script échoue si un hôte sort de la liste blanche. **Trou identifié** : aucune
+  chaîne de la liste blanche ne couvre le sprint 08 (MLOps, architecture, systèmes distribués),
+  donc ses 24 notions n'ont pas de source vidéo. L'interface l'écrit au lieu de proposer un lien
+  hors sujet. Ajouter une source relève de la règle d'extension de `prompt.md` (consommer une
+  ressource en entier d'abord), donc de l'utilisatrice, pas de l'agent.
+
+## DEC-006 — Le suivi de construction vit dans le Cockpit, pas dans le produit
+
+- **Date** : 2026-08-28
+- **Contexte** : il fallait un endroit pour suivre la construction (Airtable, Discord, n8n, agents).
+- **Choix** : un onglet « Chantier » dans le Cerveau Manager du Cockpit, alimenté par
+  `data/chantier.json`. Pas dans le dashboard produit.
+- **Raisonnement** : `integration.md` le dit déjà : VibeFlow détient « l'ordre de construction et
+  l'avancement des 7 étapes », le produit ne détient que la révision. Mettre le suivi de chantier
+  dans le produit aurait mélangé les deux surfaces.
+- **Conséquences** : l'état d'une étape n'est jamais saisi, il se **déduit** des cases cochées et
+  du graphe de dépendances (`annoterChantier`, testée) : une étape dont une dépendance n'est pas
+  finie est « Bloquée », jamais « Prête ». Cocher se fait dans `chantier.json` puis régénération,
+  volontairement : ajouter un quatrième serveur local pour cocher depuis le navigateur aurait
+  coûté plus que le besoin réel.

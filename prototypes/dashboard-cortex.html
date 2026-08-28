@@ -320,7 +320,7 @@ h1, h2, h3, h4, .display { font-family: var(--display); text-wrap: balance; }
   padding: 3px 7px;
 }
 
-.card-index { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: .04em; }
+.card-index { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: .07em; text-transform: uppercase; }
 
 .card-title {
   font-size: 25px;
@@ -426,26 +426,27 @@ pre.code {
 .verdict {
   appearance: none;
   background: var(--surface);
-  border: 1px solid var(--rule);
-  border-left: 3px solid currentColor;
+  border: 1.5px solid currentColor;
   border-radius: var(--r-md);
-  padding: 11px 13px;
+  padding: 12px 13px;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  transition: background .12s, border-color .12s;
+  align-items: center;
+  gap: 3px;
+  transition: background .12s;
 }
 .verdict:hover { background: var(--surface-2); }
-.verdict:disabled { opacity: .4; cursor: default; }
+.verdict:disabled { opacity: .38; cursor: default; }
 .verdict .v-name {
-  font-family: var(--display);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: .01em;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
-.verdict .v-key { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
+.verdict .v-key { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
 .verdict.ok { color: var(--ok); }
 .verdict.warn { color: var(--warn); }
 .verdict.bad { color: var(--bad); }
@@ -695,15 +696,15 @@ textarea.editor {
         <div class="verdicts" id="verdicts">
           <button class="verdict ok" data-v="comprise">
             <span class="v-name">Compris</span>
-            <span class="v-key">flèche gauche ou glisser</span>
+            <span class="v-key" aria-label="flèche gauche ou glisser">← ou glisser</span>
           </button>
           <button class="verdict warn" data-v="revoir">
             <span class="v-name">À revoir</span>
-            <span class="v-key">flèche bas ou glisser</span>
+            <span class="v-key" aria-label="flèche bas ou glisser">↓ ou glisser</span>
           </button>
           <button class="verdict bad" data-v="perdue">
             <span class="v-name">Perdue</span>
-            <span class="v-key">flèche droite ou glisser</span>
+            <span class="v-key" aria-label="flèche droite ou glisser">→ ou glisser</span>
           </button>
         </div>
 
@@ -786,15 +787,15 @@ textarea.editor {
         <div class="panel">
           <span class="lbl">Version</span>
           <h3>v1, d'origine</h3>
-          <p class="panel-meta">Enregistrer crée une v2 et désactive la v1. L'historique reste lisible. Les fiches déjà générées ne bougent pas.</p>
+          <p class="panel-meta">Enregistrer crée une v2 et désactive la v1. Les fiches déjà générées ne bougent pas.</p>
         </div>
       </div>
     </div>
   </section>
 
   <p class="colophon">
-    <b>Réel dans cette maquette :</b> les 192 intitulés de notions, les 8 sprints et leurs projets, le prompt système, la liste blanche des sources.<br>
-    <b>Simulé :</b> les statuts (34 notions jugées, sprint 02 en cours) et le contenu des fiches, qui sera produit par l'API à chaque envoi.<br>
+    <b>Réel :</b> les 192 intitulés, les 8 sprints, le prompt système, les sources.<br>
+    <b>Simulé :</b> les statuts et le contenu des fiches, que l'API produira à chaque envoi.<br>
     Intégrité : <span id="integrity"></span>
   </p>
 
@@ -871,7 +872,6 @@ mu_col = mu.reshape(3, 1)        # forme (3, 1)
 # (1000, 3) face a (3, 1) : plus rien ne s'aligne, NumPy leve une erreur
 print(Xn.shape, Xn.mean(axis=0).round(6))`,
     exercice: "Reprenez une boucle for écrite récemment sur un tableau et réécrivez-la sans boucle. Chronométrez les deux versions avec time.perf_counter et notez le rapport obtenu.",
-    liens: [["Vidéo", "Machine Learnia", "https://youtube.com/@MachineLearnia"], ["Tuto", "Google ML", "https://developers.google.com/machine-learning"]],
   },
   17: {
     type: "matin",
@@ -880,7 +880,6 @@ print(Xn.shape, Xn.mean(axis=0).round(6))`,
     intuition: "Une chaîne de composants où chacun transmet une valeur au suivant. Si vous changez le pas de la grille de 1 px et que chaque composant amplifie ce changement d'un facteur connu, l'effet total sur la dernière vue est le produit de tous les facteurs. La rétropropagation ne fait rien d'autre, en remontant la pile.",
     formule: "d(perte)/d(w) = d(perte)/d(a3) x d(a3)/d(a2) x d(a2)/d(w)\nw : le poids, a2 et a3 : les sorties des couches 2 et 3",
     piege: "Évaluer tous les facteurs au même point. Chacun se calcule à la valeur que son étape a réellement produite pendant la passe avant. C'est pour cela qu'on garde toutes les activations en mémoire, et c'est exactement ce qui fait exploser la RAM sur les grands modèles.",
-    liens: [["FR", "Machine Learnia", "https://youtube.com/@MachineLearnia"], ["EN", "3Blue1Brown", "https://youtube.com/@3blue1brown"]],
   },
   20: {
     type: "soir",
@@ -896,7 +895,6 @@ err = np.abs(f(a + h) - t2)                # erreur reelle
 # L'erreur croit comme h**3 : diviser h par 2 la divise par 8 environ
 print(np.round(err, 5))`,
     exercice: "Faites glisser le point de développement a de 0 à 4 sur le même intervalle. Repérez à partir de quand l'approximation devient inutilisable, et écrivez en une phrase pourquoi.",
-    liens: [["Vidéo", "3Blue1Brown", "https://youtube.com/@3blue1brown"], ["Tuto", "Google ML", "https://developers.google.com/machine-learning"]],
   },
   27: {
     type: "matin",
@@ -905,7 +903,6 @@ print(np.round(err, 5))`,
     intuition: "Une carte de chaleur d'interface. Savoir où les gens cliquent quand ils cherchent un prix ne dit pas ce qu'ils cherchaient quand ils ont cliqué là. Bayes fait la traduction entre les deux, à condition de connaître la fréquence de base de chaque intention.",
     formule: "P(A | B) = P(B | A) x P(A) / P(B)\nA : la cause, B : l'effet observé, P(A) : la fréquence de base de la cause",
     piege: "Oublier la fréquence de base. Un test fiable à 99 % sur une maladie qui touche 1 personne sur 10 000 produit surtout des faux positifs : le taux de base écrase la fiabilité du test, et l'intuition se trompe de deux ordres de grandeur.",
-    liens: [["FR", "Science Étonnante", "https://youtube.com/@ScienceEtonnante"], ["EN", "3Blue1Brown", "https://youtube.com/@3blue1brown"]],
   },
   30: {
     type: "soir",
@@ -921,7 +918,6 @@ print(round(cov, 3), round(cor, 3))           # environ 2.0 et 0.97
 # Dependance parfaite mais courbe : la correlation ne la voit pas
 print(round(np.corrcoef(x, z)[0, 1], 3))      # proche de 0`,
     exercice: "Tracez le nuage de x contre z. En une phrase, dites ce qu'une corrélation nulle vous autorise et ne vous autorise pas à conclure.",
-    liens: [["Vidéo", "StatQuest", "https://youtube.com/@statquest"], ["Tuto", "scikit-learn", "https://scikit-learn.org"]],
   },
   33: {
     type: "matin",
@@ -929,7 +925,6 @@ print(round(np.corrcoef(x, z)[0, 1], 3))      # proche de 0`,
     probleme: "Vos données de comptage ne sont pas gaussiennes. Le nombre de requêtes par minute, le délai entre deux pannes, un tirage sans information préalable : chacun a sa loi, et prendre la normale par réflexe fausse tous les intervalles que vous en tirez.",
     intuition: "Poisson et exponentielle décrivent le même flux vu de deux côtés. Poisson compte les événements par fenêtre de temps, exponentielle mesure l'attente entre deux. Taux de 3 par minute, attente moyenne d'un tiers de minute. L'uniforme, elle, est l'aveu d'ignorance assumé.",
     piege: "Supposer le taux constant. Un site n'a pas le même trafic à 3 h et à 14 h. Ajuster une seule Poisson sur les 24 heures sous-estime la variance et produit des alertes qui se déclenchent en permanence.",
-    liens: [["FR", "Machine Learnia", "https://youtube.com/@MachineLearnia"], ["EN", "StatQuest", "https://youtube.com/@statquest"]],
   },
   35: {
     type: "matin",
@@ -938,7 +933,6 @@ print(round(np.corrcoef(x, z)[0, 1], 3))      # proche de 0`,
     intuition: "Le prior joue le rôle d'une grille de mise en page : il ne dessine rien lui-même, il contraint où les choses peuvent atterrir. Avec peu de données, la grille domine la composition. Avec beaucoup, le contenu la fait presque oublier.",
     formule: "posterior ∝ vraisemblance x prior\nMAP : la valeur de theta qui maximise ce produit",
     piege: "Croire que le prior est une option. Vous en posez toujours un. La régularisation L2 que vous ajoutez par réflexe est très exactement un prior gaussien centré sur zéro. La seule question est de savoir si vous l'avez choisi ou subi.",
-    liens: [["FR", "Machine Learnia", "https://youtube.com/@MachineLearnia"], ["EN", "Lilian Weng", "https://lilianweng.github.io"]],
   },
   36: {
     type: "soir",
@@ -954,9 +948,10 @@ print(round(CE - H, 4))         # egal a KL : CE = H + KL
 # KL n'est pas symetrique : inverser p et q change le resultat
 print(round((q * np.log(q / p)).sum(), 4))`,
     exercice: "Mettez q[2] à 0.001, puis à 0. Observez ce qui casse, et déduisez pourquoi toutes les implémentations ajoutent un epsilon.",
-    liens: [["Vidéo", "3Blue1Brown", "https://youtube.com/@3blue1brown"], ["Tuto", "Hugging Face", "https://huggingface.co/learn"]],
   },
 };
+
+const SOURCES = {"notions":[{"ordre":12,"sprint":"S01","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Broadcasting%20et%20vectorisation%20NumPy","requete":"Broadcasting et vectorisation NumPy"},"en":{"label":"3Blue1Brown","url":"https://www.youtube.com/@3blue1brown/search?query=broadcasting%20vectorization%20numpy","requete":"broadcasting vectorization numpy"}},{"ordre":17,"sprint":"S01","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=R%C3%A8gle%20de%20la%20cha%C3%AEne","requete":"Règle de la chaîne"},"en":{"label":"3Blue1Brown","url":"https://www.youtube.com/@3blue1brown/search?query=chain%20rule","requete":"chain rule"}},{"ordre":20,"sprint":"S01","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=D%C3%A9veloppement%20de%20Taylor%20%C3%A0%20l'ordre%202","requete":"Développement de Taylor à l'ordre 2"},"en":{"label":"3Blue1Brown","url":"https://www.youtube.com/@3blue1brown/search?query=taylor%20series%20ordre","requete":"taylor series ordre"}},{"ordre":27,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Th%C3%A9or%C3%A8me%20de%20Bayes","requete":"Théorème de Bayes"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=bayes%20theorem","requete":"bayes theorem"}},{"ordre":30,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Covariance%20et%20corr%C3%A9lation","requete":"Covariance et corrélation"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=covariance%20correlation","requete":"covariance correlation"}},{"ordre":33,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Poisson%2C%20exponentielle%2C%20uniforme","requete":"Poisson, exponentielle, uniforme"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=poisson%20exponentielle%20uniforme","requete":"poisson exponentielle uniforme"}},{"ordre":35,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Prior%2C%20posterior%2C%20estimation%20MAP","requete":"Prior, posterior, estimation MAP"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=prior%20posterior%20estimation%20map","requete":"prior posterior estimation map"}},{"ordre":36,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Entropie%2C%20entropie%20crois%C3%A9e%2C%20divergence%20KL","requete":"Entropie, entropie croisée, divergence KL"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=entropy%20cross%20kl%20divergence","requete":"entropy cross kl divergence"}}],"sprints":[{"id":"S01","chaineFr":"Machine Learnia","chaineEn":"3Blue1Brown","playlists":[{"label":"Essence of linear algebra","url":"https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"},{"label":"Essence of calculus","url":"https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"}],"docs":[{"label":"scikit-learn","url":"https://scikit-learn.org"}]},{"id":"S02","chaineFr":"Machine Learnia","chaineEn":"StatQuest","playlists":[{"label":"Statistics Fundamentals","url":"https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9"}],"docs":[{"label":"scikit-learn","url":"https://scikit-learn.org"},{"label":"Google ML","url":"https://developers.google.com/machine-learning"}]},{"id":"S03","chaineFr":"Machine Learnia","chaineEn":"StatQuest","playlists":[],"docs":[{"label":"Made With ML","url":"https://madewithml.com"},{"label":"Google ML","url":"https://developers.google.com/machine-learning"}]},{"id":"S04","chaineFr":"Machine Learnia","chaineEn":"StatQuest","playlists":[],"docs":[{"label":"scikit-learn","url":"https://scikit-learn.org"},{"label":"Google ML","url":"https://developers.google.com/machine-learning"}]},{"id":"S05","chaineFr":"Thibault Neveu","chaineEn":"3Blue1Brown","playlists":[{"label":"Neural networks","url":"https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"}],"docs":[{"label":"karpathy.ai","url":"https://karpathy.ai"}]},{"id":"S06","chaineFr":"Thibault Neveu","chaineEn":"3Blue1Brown","playlists":[{"label":"Neural Networks: Zero to Hero","url":"https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ"}],"docs":[{"label":"Jay Alammar","url":"https://jalammar.github.io"},{"label":"karpathy.ai","url":"https://karpathy.ai"}]},{"id":"S07","chaineFr":"Thibault Neveu","chaineEn":null,"playlists":[],"docs":[{"label":"Lilian Weng","url":"https://lilianweng.github.io"},{"label":"Hugging Face Learn","url":"https://huggingface.co/learn"}]},{"id":"S08","chaineFr":null,"chaineEn":null,"playlists":[],"docs":[{"label":"Made With ML","url":"https://madewithml.com"},{"label":"Google ML","url":"https://developers.google.com/machine-learning"}]}]};
 
 const PROMPT_ORIGINE = `Tu rédiges une fiche de notion pour Opaline, product designer avec
 10 ans de métier, qui code (HTML/CSS/JS, Python en apprentissage)
@@ -1053,6 +1048,35 @@ function sectionFiche(label, texte, cls) {
   return s;
 }
 
+// Sources d'une notion : la playlist canonique du sprint, puis une recherche ciblee sur la
+// chaine FR et sur la chaine EN de la liste blanche. Aucun identifiant de video n'est fabrique
+// (regle 8 du prompt). Quand aucune chaine ne couvre le domaine, on l'ecrit.
+function sourcesDe(ordre) {
+  const box = el("div", "links");
+  const n = SOURCES.notions.find((x) => x.ordre === ordre);
+  if (!n) return box;
+  const sprint = SOURCES.sprints.find((s) => s.id === n.sprint);
+  const pastille = (prefixe, r) => {
+    const a = el("a", "link-pill");
+    a.href = r.url;
+    a.target = "_blank";
+    a.rel = "noreferrer";
+    a.appendChild(el("span", null, prefixe));
+    a.appendChild(el("span", null, r.label));
+    return a;
+  };
+  for (const pl of sprint ? sprint.playlists : []) box.appendChild(pastille("Playlist", pl));
+  if (n.fr) box.appendChild(pastille("FR", n.fr));
+  if (n.en) box.appendChild(pastille("EN", n.en));
+  for (const d of sprint ? sprint.docs : []) box.appendChild(pastille("Doc", d));
+  if (!n.fr && !n.en) {
+    const p = el("span", "link-pill", "Pas de chaîne retenue dans la liste blanche pour ce sprint");
+    p.style.borderStyle = "dashed";
+    box.appendChild(p);
+  }
+  return box;
+}
+
 function corpsFiche(n) {
   const f = FICHES[n.ordre];
   const body = el("div", "card-body");
@@ -1078,17 +1102,7 @@ function corpsFiche(n) {
     body.appendChild(code);
     body.appendChild(sectionFiche("Exercice, 15 min", f.exercice));
   }
-  const links = el("div", "links");
-  for (const [k, nom, url] of f.liens) {
-    const a = el("a", "link-pill");
-    a.href = url;
-    a.target = "_blank";
-    a.rel = "noreferrer";
-    a.appendChild(el("span", null, k));
-    a.appendChild(el("span", null, nom));
-    links.appendChild(a);
-  }
-  body.appendChild(links);
+  body.appendChild(sourcesDe(n.ordre));
   return body;
 }
 
