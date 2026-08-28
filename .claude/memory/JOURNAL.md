@@ -32,3 +32,14 @@ fait / bloque / prochaine action.
 - **Bloqué** : rien. Écart signalé, non tranché : le sens des gestes de verdict (voir DEC-004).
 - **Prochaine action** : trancher DEC-004, puis étape 1 de l'ordre de construction (base Airtable
   `CORTEX`, import du CSV, lecture en API).
+
+## 2026-08-28 (3)
+
+- **Fait** : le principe visuel de la maquette (DEC-003) est maintenant aussi dans le Cockpit,
+  onglet Cerveau Manager > Cortex : réglette des 192 notions en progression, planche 8 x 24 pour
+  situer les notions perdues. Rendu avec les tokens VibeFlow et non la palette CORTEX, pour ne pas
+  créer deux identités dans une même application (décision tracée côté racine VibeFlow).
+- **Bloqué** : rien. DEC-004 (sens des gestes de verdict) toujours ouvert, à trancher avant
+  l'étape 2.
+- **Prochaine action** : étape 1 de l'ordre de construction, créer la base Airtable `CORTEX` et y
+  importer `data/curriculum-192-notions.csv` tel quel.
