@@ -18,3 +18,17 @@ fait / bloque / prochaine action.
   `CORTEX` n'existe pas encore, donc aucun statut de notion n'est encore réel.
 - **Prochaine action** : étape 1 de l'ordre de construction — créer la base Airtable `CORTEX`,
   importer le CSV tel quel, vérifier la lecture en API.
+
+## 2026-08-28 (2)
+
+- **Fait** : maquette cliquable du dashboard produit, `prototypes/dashboard-cortex.html`, publiée
+  en artifact. Reprise complète de la première maquette externe : nom CORTEX, contenu de fiche
+  qui ne tronque plus (la pile épouse la hauteur de la fiche, défilement interne au-delà),
+  suppression des emoji de verdict, pile de 3 cartes réelle avec glissement, tampon et envol,
+  progression redessinée en trame des 192 notions et Planning en planche 8 x 24 (voir DEC-003),
+  textes d'interface resserrés. Les 192 intitulés, les 8 sprints et le prompt viennent des
+  fichiers réels du dépôt ; seuls les statuts et le contenu des fiches sont simulés, et la
+  maquette le dit en tête et en pied de page.
+- **Bloqué** : rien. Écart signalé, non tranché : le sens des gestes de verdict (voir DEC-004).
+- **Prochaine action** : trancher DEC-004, puis étape 1 de l'ordre de construction (base Airtable
+  `CORTEX`, import du CSV, lecture en API).

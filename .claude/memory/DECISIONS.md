@@ -38,3 +38,39 @@ supprimer ; marquer `[REMPLACÉE PAR DEC-XXX]` si obsolète.
   dès que le programme démarre. Quand Airtable sera la source vivante, remplacer la lecture du CSV
   dans `collect-data.mjs` par un export Airtable rafraîchi, sans toucher à l'UI ni au calcul
   d'agrégation (`aggregateCortexSprints`, testé).
+
+## DEC-003 — Direction artistique de l'interface produit : la progression est la trame des 192 notions
+
+- **Date** : 2026-08-28
+- **Contexte** : la première maquette (générée depuis `prompt-dashboard-revision-192.md` dans un
+  outil externe) portait six défauts : le contenu de fiche tronqué en plein milieu, une colonne
+  gauche vide sur toute une hauteur d'écran, des emoji comme marqueurs de verdict (interdits par
+  `ecrans.md`), la pile de cartes absente, un Planning très peu dense, et de la prose explicative
+  dans une interface mono-utilisatrice.
+- **Options envisagées** : (a) corriger les défauts un par un en gardant la barre de progression
+  générique ; (b) chercher un principe visuel propre au sujet et en dériver les écrans.
+- **Choix** : (b). La progression n'est plus une barre remplie à 18 %, c'est **la trame des 192
+  notions elle-même** : une réglette de 192 traits en tête de page, et la même trame en planche
+  8 x 24 sur l'écran Planning, une case par notion colorée par son verdict.
+- **Raisonnement** : une barre de progression est vraie mais muette. La trame porte exactement la
+  même information plus la localisation : on voit d'un coup d'œil *quelles* notions sont perdues et
+  dans quel sprint elles se concentrent, ce qu'aucun pourcentage ne dira jamais. Elle donne aussi
+  au produit une identité qui n'appartient qu'à lui, là où une barre appartient à tout le monde.
+  Un seul système visuel, deux échelles, zéro composant décoratif.
+- **Conséquences** : les couleurs de verdict (vert, ambre, rouge) deviennent structurantes et
+  doivent rester strictement réservées aux verdicts, sinon la trame devient illisible. Le bleu
+  d'accent ne sert qu'au tracé (règle active, filet du sprint en cours, focus) et à l'état
+  « envoyée, verdict en attente ». Maquette cliquable : `prototypes/dashboard-cortex.html`.
+
+## DEC-004 — Le sens des gestes de verdict reste celui d'`ecrans.md`, malgré la convention inverse
+
+- **Date** : 2026-08-28
+- **Contexte** : `ecrans.md` fixe Compris = glisser à gauche, Perdue = glisser à droite. La
+  convention établie par les interfaces à pile de cartes est l'inverse : droite = positif.
+- **Choix** : implémenter la spec telle qu'écrite dans la maquette, et signaler l'écart plutôt que
+  de le corriger en silence.
+- **Raisonnement** : c'est une décision d'usage personnel, pas un bug. La mémoire gestuelle
+  acquise ailleurs jouera contre ce sens à chaque session, mais l'arbitrage appartient à
+  l'utilisatrice, pas à l'implémentation.
+- **Conséquences** : à trancher avant l'étape 2 de l'ordre de construction. Inverser plus tard
+  coûte une ligne dans le gestionnaire de glissement et deux libellés, rien de plus.
