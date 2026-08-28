@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Ne jamais versionner de secrets exportés
+*.secrets.json
+.env

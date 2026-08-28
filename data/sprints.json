@@ -1,0 +1,90 @@
+[
+  {
+    "id": "S01",
+    "nom": "Algèbre linéaire & calcul différentiel",
+    "semaines": "Sem. 1-2",
+    "domaine": "Maths",
+    "premiere_notion": 1,
+    "derniere_notion": 24,
+    "accroche": "Le langage dans lequel tout le reste est écrit. Un gradient, une jacobienne et une règle de la chaîne : la backpropagation n'est rien d'autre.",
+    "projet_titre": "Régression linéaire from scratch",
+    "projet_brief": "Descente de gradient codée à la main en NumPy, sans scikit-learn. Vous tracez la surface d'erreur en 3D, vous faites varier le learning rate jusqu'à la divergence, et vous expliquez en trois phrases pourquoi elle diverge. Livrable : un notebook et une figure."
+  },
+  {
+    "id": "S02",
+    "nom": "Probabilités, statistiques & optimisation",
+    "semaines": "Sem. 3-4",
+    "domaine": "Maths",
+    "premiere_notion": 25,
+    "derniere_notion": 48,
+    "accroche": "Un modèle ne prédit pas, il estime. Sans le vocabulaire probabiliste, la fonction de coût reste une formule qu'on recopie.",
+    "projet_titre": "Une vraie analyse statistique",
+    "projet_brief": "Prenez vos propres données de candidature (ou un jeu data.gouv.fr). Distributions, intervalles de confiance, un test d'hypothèse honnête, et une conclusion qui dit explicitement ce que les données ne permettent pas de conclure. Livrable : un rapport de deux pages."
+  },
+  {
+    "id": "S03",
+    "nom": "Data engineering & preprocessing",
+    "semaines": "Sem. 5-6",
+    "domaine": "Data",
+    "premiere_notion": 49,
+    "derniere_notion": 72,
+    "accroche": "Quatre-vingts pour cent du travail réel. C'est aussi le sprint le plus directement monnayable en entretien.",
+    "projet_titre": "Un pipeline ETL de bout en bout",
+    "projet_brief": "Une API publique en entrée, du Parquet partitionné en sortie, orchestré, rejouable, avec un notebook de contrôle qualité qui échoue bruyamment si la fraîcheur dépasse 24 h. Livrable : un dépôt git avec un README qui explique les choix."
+  },
+  {
+    "id": "S04",
+    "nom": "Machine learning classique",
+    "semaines": "Sem. 7-8",
+    "domaine": "ML",
+    "premiere_notion": 73,
+    "derniere_notion": 96,
+    "accroche": "Ce que 90 % des entreprises utilisent réellement en production. Un gradient boosting bien réglé bat encore un réseau de neurones sur données tabulaires.",
+    "projet_titre": "Cinq modèles, un verdict",
+    "projet_brief": "Un problème de classification réel, cinq familles d'algorithmes comparées à la loyale (même split, même validation croisée), les métriques choisies avant de voir les résultats, et une analyse SHAP qui explique la décision du meilleur modèle. Livrable : un notebook et un tableau comparatif."
+  },
+  {
+    "id": "S05",
+    "nom": "Deep learning",
+    "semaines": "Sem. 9-10",
+    "domaine": "DL",
+    "premiere_notion": 97,
+    "derniere_notion": 120,
+    "accroche": "Les briques. CNN, RNN, autoencodeurs, GAN : toutes reposent sur les deux mêmes mécanismes vus au sprint 1.",
+    "projet_titre": "Un CNN et un détecteur d'anomalie",
+    "projet_brief": "Fine-tuning d'un ResNet sur un jeu d'images à vous (vos captures d'interface, pourquoi pas), puis un autoencodeur qui repère les images hors distribution. Vous mesurez ce que l'augmentation de données change vraiment. Livrable : deux notebooks et une matrice de confusion commentée."
+  },
+  {
+    "id": "S06",
+    "nom": "Transformers, LLM & apprentissage par renforcement",
+    "semaines": "Sem. 11-12",
+    "domaine": "LLM & RL",
+    "premiere_notion": 121,
+    "derniere_notion": 144,
+    "accroche": "Le sprint qui transforme « j'utilise un LLM » en « je sais ce qui se passe entre le prompt et la réponse ».",
+    "projet_titre": "Votre micro-GPT",
+    "projet_brief": "Suivre la série « Neural Networks: Zero to Hero » d'Andrej Karpathy jusqu'à nanoGPT, puis l'entraîner sur votre propre corpus : vos articles ANTIDOTE. Le modèle sera mauvais. Ce n'est pas le sujet. Le sujet, c'est que vous aurez écrit chaque ligne de l'attention. Livrable : un dépôt et 500 tokens générés."
+  },
+  {
+    "id": "S07",
+    "nom": "IA appliquée : RAG, mémoire, agents",
+    "semaines": "Sem. 13-14",
+    "domaine": "IA appliquée",
+    "premiere_notion": 145,
+    "derniere_notion": 168,
+    "accroche": "Là où se trouve votre valeur marchande immédiate. Et là où le mot « OS agentique » commence à vouloir dire quelque chose de vérifiable.",
+    "projet_titre": "Un RAG que vous pouvez défendre en entretien",
+    "projet_brief": "Votre corpus, un retrieval hybride avec reranking, une suite d'évaluation qui donne un score de groundedness, des traces exploitables et un coût mesuré par requête. Puis un agent outillé par-dessus. Livrable : une démo et une page de métriques. C'est la pièce maîtresse du portfolio."
+  },
+  {
+    "id": "S08",
+    "nom": "MLOps, architecture & systèmes distribués",
+    "semaines": "Sem. 15-16",
+    "domaine": "MLOps & Archi",
+    "premiere_notion": 169,
+    "derniere_notion": 192,
+    "accroche": "Ce qui sépare une démo d'un produit. Le sprint le plus ingrat, celui qui fait la différence dans une scale-up B2B.",
+    "projet_titre": "Mettre le RAG en production",
+    "projet_brief": "Reprendre le projet du sprint 7 et le rendre exploitable : conteneurisé, déployé derrière une API, avec CI, monitoring de dérive, alerte de coût et procédure de rollback. Livrable : une URL qui répond, et un dashboard qui dit combien elle coûte."
+  }
+]
