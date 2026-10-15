@@ -1,0 +1,1433 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CORTEX</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23070709'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%232597d0' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  CORTEX, prototype gamifié. Style « Letters » (DESIGN.md, 2026-10-15) : canvas blanc,
+  encre obsidienne, pilules, un seul bleu fonctionnel, dégradé ciel réservé au bandeau.
+  Écarts à ecrans.md tracés dans .claude/memory/DECISIONS.md (DEC-007).
+  Données : 192 titres, fiches, sources et prompt repris du prototype v1, état simulé.
+-->
+<style>
+/* ============================================================
+   Tokens. Clair par défaut, sombre défini par les mêmes noms.
+   ============================================================ */
+:root {
+  --obsidian: #070709;
+  --ink: #151515;
+  --charcoal: #60606c;
+  --slate: #8b8b8b;
+  --hair: #bebecc;
+  --line: #e8e8ee;
+  --paper: #ffffff;
+  --cloud: #f5f5f5;
+  --sky-tint: #d7e6f5;
+  --blue: #2597d0;
+  --sky: linear-gradient(180deg, #779bc1 0%, #9abfda 58%, #cbdcec 100%);
+  --on-sky: #ffffff;
+
+  --bg: var(--paper);
+  --surface: var(--paper);
+  --surface-2: var(--cloud);
+  --text: var(--obsidian);
+  --heading: var(--ink);
+  --muted: var(--charcoal);
+  --faint: var(--slate);
+  --cta-bg: var(--obsidian);
+  --cta-text: #ffffff;
+  --focus: #2597d0;
+
+  /* Verdicts : couleurs d'état, jamais décoratives (validées au script dataviz). */
+  --ok: #17855a;      --ok-bg: #e7f4ee;
+  --again: #c08a1a;   --again-bg: #fbf2df;
+  --lost: #c23b31;    --lost-bg: #fbe8e6;
+
+  --font-display: "Inter Tight", "Open Runde", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-ui: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-caption: 12px; --text-body-sm: 14px; --text-body: 16px; --text-body-lg: 18px;
+  --text-subheading: 20px; --text-heading-sm: 28px; --text-heading: 44px; --text-display: 80px;
+
+  --radius-pill: 100px; --radius-card: 18px; --radius-large: 32px;
+  --radius-input: 12px; --radius-icon: 8px;
+
+  --shadow-subtle: rgba(228, 229, 231, 0.24) 0 1px 2px 0;
+  --shadow-cta: rgba(36,36,40,.1) 0 1px 2px 0, rgba(36,36,40,.09) 0 3px 3px 0, rgba(36,36,40,.05) 0 6px 4px 0, rgba(36,36,40,.01) 0 11px 4px 0;
+  --shadow-blue: rgba(23,107,197,.08) 0 1px 1px 0, rgba(23,107,197,.07) 0 3px 3px 0;
+  --shadow-xl: rgba(16,55,132,.03) 0 17px 37px 0, rgba(16,55,132,.03) 0 67px 67px 0, rgba(16,55,132,.02) 0 150px 90px 0;
+  --shadow-card: 0 0 0 1px var(--line), var(--shadow-xl);
+
+  --page-max: 1200px;
+  --gutter: 16px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0d12; --surface: #13161d; --surface-2: #1a1e27; --line: #262b36; --hair: #3a404d;
+    --text: #f2f3f6; --heading: #ffffff; --muted: #a6aab6; --faint: #7d8290;
+    --cta-bg: #f2f3f6; --cta-text: #070709; --sky-tint: #1c2c40;
+    --sky: linear-gradient(180deg, #13243b 0%, #1f3a5a 58%, #2b4a6b 100%);
+    --ok: #2ea371; --ok-bg: #12261d; --again: #bf8a0c; --again-bg: #2a2110; --lost: #e8476a; --lost-bg: #2c1219;
+    --blue: #2f95cc; --focus: #4fb4e6;
+    --shadow-card: 0 0 0 1px var(--line), 0 20px 40px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b0d12; --surface: #13161d; --surface-2: #1a1e27; --line: #262b36; --hair: #3a404d;
+  --text: #f2f3f6; --heading: #ffffff; --muted: #a6aab6; --faint: #7d8290;
+  --cta-bg: #f2f3f6; --cta-text: #070709; --sky-tint: #1c2c40;
+  --sky: linear-gradient(180deg, #13243b 0%, #1f3a5a 58%, #2b4a6b 100%);
+  --ok: #2ea371; --ok-bg: #12261d; --again: #bf8a0c; --again-bg: #2a2110; --lost: #e8476a; --lost-bg: #2c1219;
+  --blue: #2f95cc; --focus: #4fb4e6;
+  --shadow-card: 0 0 0 1px var(--line), 0 20px 40px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 400 var(--text-body)/1.49 var(--font-display);
+  letter-spacing: -0.01em; overflow-x: hidden;
+  font-variant-numeric: tabular-nums;
+}
+h1, h2, h3 { color: var(--heading); margin: 0; font-weight: 600; letter-spacing: -0.04em; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gutter); }
+.ico { width: 16px; height: 16px; flex: none; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- Pilules ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 12px 24px; border-radius: var(--radius-pill);
+  font: 500 15px/1 var(--font-display); letter-spacing: -0.01em; cursor: pointer;
+  border: 1px solid transparent; text-decoration: none; transition: transform .15s, background .15s, border-color .15s;
+}
+.btn-primary { background: var(--cta-bg); color: var(--cta-text); box-shadow: var(--shadow-cta); }
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-ghost { background: transparent; border-color: var(--hair); color: var(--text); }
+.btn-ghost:hover { border-color: var(--faint); }
+.btn-sm { min-height: 36px; padding: 8px 16px; font-size: 14px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: var(--radius-pill);
+  border: 1px solid var(--hair); background: var(--surface); color: var(--text);
+  font: 500 12px/1.2 var(--font-display); letter-spacing: -0.01em; white-space: nowrap;
+}
+.tag .ico { width: 14px; height: 14px; }
+.kbd { font: 500 11px/1 var(--font-ui); padding: 3px 6px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); }
+
+/* ---- Navigation ---- */
+.nav {
+  position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 600 17px/1 var(--font-display); letter-spacing: -0.03em; color: var(--heading); }
+.brand-mark { width: 26px; height: 26px; border-radius: var(--radius-icon); background: var(--cta-bg); display: grid; place-items: center; }
+.brand-mark svg { width: 16px; height: 16px; stroke: var(--cta-text); fill: none; stroke-width: 1.8; }
+.tabs { display: flex; gap: 4px; padding: 4px; border-radius: var(--radius-pill); background: var(--surface-2); }
+.tab {
+  border: 0; background: transparent; padding: 8px 16px; border-radius: var(--radius-pill); cursor: pointer;
+  font: 500 14px/1.2 var(--font-ui); letter-spacing: -0.022em; color: var(--muted); min-height: 36px;
+}
+.tab[aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow-cta); }
+.nav-end { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+.icon-btn { width: 40px; height: 40px; border-radius: var(--radius-pill); border: 1px solid var(--hair); background: transparent; display: grid; place-items: center; cursor: pointer; }
+.icon-btn svg { width: 18px; height: 18px; stroke: var(--text); fill: none; stroke-width: 1.8; }
+
+/* ============================================================
+   Bandeau ciel (Révision uniquement)
+   ============================================================ */
+.hero { background: var(--sky); color: var(--on-sky); padding: 72px 0 120px; text-align: center; }
+.hero .tag { border-color: transparent; box-shadow: var(--shadow-blue); }
+.hero h1 {
+  color: var(--on-sky); margin: 20px auto 0; max-width: 900px;
+  font-size: clamp(44px, 9vw, var(--text-display)); line-height: .9; letter-spacing: -0.04em; font-weight: 600;
+}
+.hero h1 span { display: block; }
+.hero-sub { margin: 24px auto 0; max-width: 520px; font-size: var(--text-body-lg); line-height: 1.49; color: color-mix(in srgb, var(--on-sky) 92%, transparent); }
+.hero-cta { margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero .btn-primary { background: #070709; color: #fff; }
+.hero .btn-ghost { border-color: rgba(255,255,255,.7); color: #fff; }
+
+.stats {
+  margin: -72px auto 0; position: relative; z-index: 2;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px;
+}
+.stat {
+  background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--shadow-card);
+  padding: 24px; display: flex; gap: 16px; align-items: center; min-width: 0;
+}
+.stat-k { font: 500 12px/1.2 var(--font-display); color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.stat-v { font: 600 var(--text-heading-sm)/1.1 var(--font-display); letter-spacing: -0.04em; color: var(--heading); margin-top: 6px; }
+.stat-v small { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; color: var(--muted); }
+.stat-note { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.ring { width: 72px; height: 72px; flex: none; }
+.ring circle { fill: none; stroke-width: 7; }
+.ring .r-bg { stroke: var(--line); }
+.ring .r-fg { stroke: var(--blue); stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset .5s cubic-bezier(.2,.8,.2,1); }
+.ring text { fill: var(--heading); font: 600 15px var(--font-display); }
+.bar { height: 6px; border-radius: 4px; background: var(--line); overflow: hidden; margin-top: 10px; }
+.bar > i { display: block; height: 100%; background: var(--blue); border-radius: 4px; transition: width .5s; }
+
+/* ============================================================
+   Révision : pile + colonne droite
+   ============================================================ */
+.section { padding: 80px 0; }
+.section-head { text-align: center; margin-bottom: 40px; }
+.section-head h2 { font-size: clamp(28px, 5vw, var(--text-heading)); line-height: 1.1; }
+.section-head p { color: var(--muted); margin-top: 12px; }
+.grid-rev { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px; align-items: start; }
+
+.pile-col { position: sticky; top: 96px; }
+.stack { position: relative; height: 560px; }
+.card {
+  position: absolute; inset: 0; background: var(--surface); border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card); padding: 32px; display: flex; flex-direction: column;
+  transform-origin: 50% 0; transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s; touch-action: none;
+  user-select: none; -webkit-user-select: none;
+}
+.card[data-depth="0"] { cursor: grab; z-index: 3; }
+.card[data-depth="1"] { transform: translateY(10px) scale(.965); z-index: 2; }
+.card[data-depth="2"] { transform: translateY(20px) scale(.93); z-index: 1; }
+.card.dragging { transition: none; cursor: grabbing; }
+.card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.card-num { font: 500 12px/1 var(--font-ui); color: var(--muted); letter-spacing: .02em; }
+.card h3 { font-size: var(--text-heading-sm); line-height: 1.2; margin: 20px 0 16px; }
+.card-body { overflow-y: auto; flex: 1; padding-right: 6px; margin-right: -6px; overscroll-behavior: contain; }
+.blk { margin-top: 18px; }
+.blk-k { font: 600 11px/1.2 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 6px; }
+.blk p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+.blk-piege { border-left: 3px solid var(--again); background: var(--again-bg); padding: 14px 16px; border-radius: 0 var(--radius-input) var(--radius-input) 0; }
+.blk-piege p { color: var(--text); }
+.formule, pre.code {
+  font: 13px/1.55 var(--font-mono); background: var(--surface-2); border-radius: var(--radius-input);
+  padding: 14px 16px; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--text); letter-spacing: 0;
+}
+.sources { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.sources a { text-decoration: none; }
+.sources a:hover { border-color: var(--faint); }
+.stamp {
+  position: absolute; top: 28px; padding: 6px 14px; border-radius: var(--radius-pill); border: 2px solid;
+  font: 700 18px/1 var(--font-display); letter-spacing: -0.01em; opacity: 0; pointer-events: none; background: var(--surface);
+}
+.stamp-ok { left: 28px; color: var(--ok); border-color: var(--ok); }
+.stamp-again { left: 50%; transform: translateX(-50%); bottom: 28px; top: auto; color: var(--again); border-color: var(--again); }
+.stamp-lost { right: 28px; color: var(--lost); border-color: var(--lost); }
+
+.verdicts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 40px; }
+.v-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 12px 16px;
+  border-radius: var(--radius-pill); border: 1px solid var(--hair); background: var(--surface); cursor: pointer;
+  font: 500 15px/1.1 var(--font-display); color: var(--text); transition: border-color .15s, background .15s, transform .15s;
+}
+.v-btn:hover { transform: translateY(-1px); }
+.v-btn[data-v="ok"]:hover { border-color: var(--ok); background: var(--ok-bg); }
+.v-btn[data-v="again"]:hover { border-color: var(--again); background: var(--again-bg); }
+.v-btn[data-v="lost"]:hover { border-color: var(--lost); background: var(--lost-bg); }
+.v-btn:disabled { opacity: .4; cursor: default; transform: none; }
+.mark { width: 18px; height: 18px; flex: none; display: grid; place-items: center; border-radius: 50%; }
+.mark svg { width: 12px; height: 12px; stroke: #fff; fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.mark-ok { background: var(--ok); } .mark-again { background: var(--again); } .mark-lost { background: var(--lost); }
+.honest { text-align: center; color: var(--muted); font-size: 13px; margin-top: 14px; }
+
+.empty {
+  position: absolute; inset: 0; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card);
+  padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px;
+}
+.empty h3 { font-size: var(--text-heading); line-height: 1.1; }
+.empty p { color: var(--muted); max-width: 380px; }
+.feel { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+.feel .btn[aria-pressed="true"] { background: var(--cta-bg); color: var(--cta-text); border-color: transparent; }
+
+.aside { display: flex; flex-direction: column; gap: 16px; }
+.panel { background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: 28px; }
+.panel-k { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
+.panel h3 { font-size: var(--text-subheading); line-height: 1.3; letter-spacing: -0.03em; }
+.panel-sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
+.quest { border: 1px solid var(--line); position: relative; overflow: hidden; }
+.quest::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--blue); }
+.checks { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-direction: column; gap: 4px; }
+.checks label { display: flex; gap: 12px; align-items: flex-start; padding: 8px; border-radius: var(--radius-input); cursor: pointer; font-size: 15px; }
+.checks label:hover { background: var(--surface-2); }
+.checks input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--obsidian); flex: none; }
+.checks input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--hair); }
+.reward { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-top: 12px; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tile { background: var(--surface-2); border-radius: var(--radius-input); padding: 16px; }
+.tile-n { font: 600 28px/1 var(--font-display); letter-spacing: -0.04em; color: var(--heading); }
+.tile-k { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); margin-top: 8px; }
+.integrity { font-size: 12px; color: var(--muted); margin-top: 12px; display: flex; gap: 6px; align-items: center; }
+.list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+.list li { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.list li:first-child { border-top: 0; }
+.list .grow { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list .meta { color: var(--muted); font-size: 13px; white-space: nowrap; }
+
+/* ---- Toast de points ---- */
+.toasts { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 50; display: flex; flex-direction: column; gap: 8px; align-items: center; pointer-events: none; }
+.toast {
+  background: var(--cta-bg); color: var(--cta-text); padding: 10px 18px; border-radius: var(--radius-pill);
+  font: 500 14px/1.2 var(--font-display); box-shadow: var(--shadow-cta); display: flex; gap: 10px; align-items: center;
+  animation: toast 2.6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.toast b { font-weight: 700; }
+@keyframes toast { 0% { opacity: 0; transform: translateY(12px); } 12%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-8px); } }
+
+/* ============================================================
+   Parcours : carte du cortex
+   ============================================================ */
+.map { background: var(--surface); border-radius: var(--radius-large); box-shadow: var(--shadow-card); padding: 40px; }
+.map-row { display: grid; grid-template-columns: 220px minmax(0, 1fr) 120px; gap: 20px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+.map-row:first-of-type { border-top: 0; }
+.map-row.current { background: linear-gradient(90deg, color-mix(in srgb, var(--sky-tint) 70%, transparent), transparent 70%); border-radius: var(--radius-input); margin: 0 -16px; padding: 14px 16px; }
+.map-row.locked { opacity: .55; }
+.row-name { min-width: 0; }
+.row-name b { display: block; font: 600 15px/1.2 var(--font-display); letter-spacing: -0.02em; color: var(--heading); }
+.row-name span { display: block; font-size: 12px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cells { display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); gap: 3px; }
+.cell { aspect-ratio: 1; border-radius: 5px; border: 1.5px solid var(--hair); background: transparent; position: relative; min-width: 0; }
+.cell[data-s="envoyee"] { border-color: var(--blue); box-shadow: inset 0 0 0 2px var(--surface), inset 0 0 0 5px var(--blue); }
+.cell[data-s="comprise"] { border-color: var(--ok); background: color-mix(in srgb, var(--ok) calc(var(--p, 1) * 30%), transparent); }
+.cell[data-s="ancree"] { border-color: var(--ok); background: var(--ok); }
+.cell[data-s="ancree"]::after { content: ""; position: absolute; inset: 28%; border-radius: 50%; background: var(--surface); }
+.cell[data-s="revoir"] { border-color: var(--again); background: repeating-linear-gradient(135deg, var(--again) 0 2px, transparent 2px 5px); }
+.cell[data-s="perdue"] { border-color: var(--lost); background: linear-gradient(45deg, transparent 42%, var(--lost) 42% 58%, transparent 58%), linear-gradient(-45deg, transparent 42%, var(--lost) 42% 58%, transparent 58%); }
+.row-end { text-align: right; }
+.row-end b { font: 600 15px/1 var(--font-display); color: var(--heading); }
+.row-end .tag { margin-top: 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 28px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend .cell { width: 14px; display: inline-block; }
+
+.paliers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+.palier { background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: 24px; }
+.palier.locked { box-shadow: none; border: 1px dashed var(--hair); background: transparent; }
+.palier-k { font-size: 12px; color: var(--muted); }
+.palier b { display: block; font: 600 18px/1.25 var(--font-display); letter-spacing: -0.02em; color: var(--heading); margin-top: 6px; }
+.palier p { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.badge { display: flex; gap: 16px; align-items: flex-start; background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: 20px; }
+.badge.locked { box-shadow: none; border: 1px dashed var(--hair); background: transparent; }
+.badge-ico { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--sky-tint); flex: none; }
+.badge.locked .badge-ico { background: var(--surface-2); }
+.badge.locked .badge-ico .ico { stroke: var(--faint); }
+.badge-ico .ico { width: 22px; height: 22px; }
+.badge b { font: 600 15px/1.3 var(--font-display); color: var(--heading); letter-spacing: -0.02em; }
+.badge p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* ============================================================
+   Prompt
+   ============================================================ */
+.grid-prompt { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+textarea.prompt {
+  width: 100%; min-height: 460px; resize: vertical; border: 1px solid var(--hair); border-radius: var(--radius-input);
+  padding: 18px; font: 13px/1.6 var(--font-mono); letter-spacing: 0; color: var(--text); background: var(--surface);
+}
+textarea.prompt:focus { outline: 2px solid var(--focus); outline-offset: 1px; border-color: transparent; }
+.row-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+.vars { display: flex; flex-wrap: wrap; gap: 8px; }
+.vars button { cursor: pointer; font-family: var(--font-mono); letter-spacing: 0; }
+.vars button:hover { border-color: var(--faint); }
+.status-line { font-size: 13px; color: var(--muted); }
+
+/* ============================================================
+   Mesure
+   ============================================================ */
+.job { background: var(--surface-2); border-radius: var(--radius-large); padding: 40px; text-align: center; }
+.job q { display: block; font: 500 clamp(20px, 3vw, 28px)/1.3 var(--font-display); letter-spacing: -0.03em; color: var(--heading); max-width: 820px; margin: 14px auto 0; quotes: "« " " »"; }
+.job p { color: var(--muted); max-width: 640px; margin: 14px auto 0; font-size: 15px; }
+.grid-ns { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; margin-top: 24px; }
+.hero-num { font: 600 clamp(56px, 8vw, 80px)/.9 var(--font-display); letter-spacing: -0.04em; color: var(--heading); margin-top: 16px; }
+.hero-num small { font-size: 24px; letter-spacing: -0.02em; color: var(--muted); font-weight: 500; }
+.chart { position: relative; margin-top: 8px; }
+.chart svg { width: 100%; height: 220px; display: block; overflow: visible; }
+.chart .grid-l { stroke: var(--line); stroke-width: 1; }
+.chart .target { stroke: var(--heading); stroke-width: 1; stroke-dasharray: 4 4; }
+.chart .ax { fill: var(--muted); font: 11px var(--font-ui); }
+.chart .b { fill: var(--blue); }
+.chart .b.dim { fill: var(--hair); }
+.chart .hit { fill: transparent; cursor: pointer; }
+.chart .hit:hover + .b, .chart .hit:focus + .b { fill: var(--heading); }
+.tip {
+  position: absolute; pointer-events: none; background: var(--cta-bg); color: var(--cta-text); padding: 8px 12px; border-radius: 10px;
+  font: 500 12px/1.4 var(--font-ui); white-space: nowrap; transform: translate(-50%, calc(-100% - 10px)); opacity: 0; transition: opacity .12s;
+}
+.link-btn { background: none; border: 0; padding: 0; color: var(--muted); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+table.t { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.t th { text-align: left; font: 600 11px/1.2 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--faint); padding: 0 12px 10px 0; }
+table.t td { padding: 12px 12px 12px 0; border-top: 1px solid var(--line); vertical-align: top; }
+table.t td.num { font-weight: 600; white-space: nowrap; }
+.state { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.state i { width: 8px; height: 8px; border-radius: 50%; }
+.state.good i { background: var(--ok); } .state.warn i { background: var(--again); } .state.bad i { background: var(--lost); }
+.simu { font-size: 12px; color: var(--faint); }
+.scroll-x { overflow-x: auto; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+.evt { font: 12px/1.5 var(--font-mono); letter-spacing: 0; color: var(--muted); word-break: break-word; }
+.evt b { color: var(--text); font-weight: 600; }
+
+.foot { padding: 40px 0 64px; text-align: center; color: var(--faint); font-size: 13px; }
+
+/* ============================================================
+   Mobile : 16px de marge, aucune barre horizontale
+   ============================================================ */
+@media (max-width: 960px) {
+  .grid-rev, .grid-prompt, .grid-ns, .grid-2 { grid-template-columns: minmax(0, 1fr); }
+  .pile-col { position: static; }
+  .paliers { grid-template-columns: repeat(2, 1fr); }
+  .badges { grid-template-columns: repeat(2, 1fr); }
+  .map-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .map-row .cells { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (max-width: 720px) {
+  .nav-in { grid-template-columns: 1fr auto; height: auto; padding: 10px 0; row-gap: 10px; }
+  .tabs { grid-column: 1 / -1; grid-row: 2; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .tab { padding: 8px 4px; font-size: 13px; }
+  .nav-end .btn { display: none; }
+  .hero { padding: 48px 0 104px; }
+  .stats { grid-template-columns: minmax(0, 1fr); }
+  .stack { height: 520px; }
+  .card { padding: 24px; }
+  .verdicts { gap: 8px; }
+  .v-btn { flex-direction: column; gap: 6px; font-size: 13px; min-height: 64px; padding: 10px 6px; }
+  .v-btn .kbd { display: none; }
+  .map, .job { padding: 24px; border-radius: var(--radius-card); }
+  .cells { gap: 2px; }
+  .cell { border-radius: 3px; border-width: 1px; }
+  .paliers, .badges { grid-template-columns: minmax(0, 1fr); }
+  .section { padding: 56px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 1V6a2 2 0 0 0-3-2Z"/><path d="M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 1"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9Z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6L3.4 9.3l6-.7Z"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".5"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4Z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Zm0 0v16"/></symbol>
+  <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v14m-7-7a7 7 0 0 0 14 0M8 11h8"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4 12H2m20 0h-2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6Z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H3"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <div class="brand"><span class="brand-mark"><svg><use href="#i-brain"/></svg></span>CORTEX</div>
+    <div class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" id="t-revision" aria-controls="v-revision" aria-selected="true">Révision</button>
+      <button class="tab" role="tab" id="t-parcours" aria-controls="v-parcours" aria-selected="false" tabindex="-1">Parcours</button>
+      <button class="tab" role="tab" id="t-prompt" aria-controls="v-prompt" aria-selected="false" tabindex="-1">Prompt</button>
+      <button class="tab" role="tab" id="t-mesure" aria-controls="v-mesure" aria-selected="false" tabindex="-1">Mesure</button>
+    </div>
+    <div class="nav-end">
+      <span class="tag" id="nav-serie" title="Série de jours tenus"><svg class="ico"><use href="#i-flame"/></svg><span></span></span>
+      <button class="icon-btn" id="theme" aria-label="Basculer le thème clair ou sombre"><svg><use href="#i-moon"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ======================= RÉVISION ======================= -->
+<section id="v-revision" role="tabpanel" aria-labelledby="t-revision">
+  <div class="hero">
+    <div class="wrap">
+      <span class="tag" id="hero-tag"><svg class="ico"><use href="#i-flag"/></svg><span></span></span>
+      <h1 id="hero-h1"><span></span><span></span></h1>
+      <p class="hero-sub" id="hero-sub"></p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#pile" id="go">Commencer la séance</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat">
+        <svg class="ring" viewBox="0 0 80 80" role="img" id="ring" aria-label="">
+          <circle class="r-bg" cx="40" cy="40" r="32"/>
+          <circle class="r-fg" cx="40" cy="40" r="32"/>
+          <text x="40" y="45" text-anchor="middle"></text>
+        </svg>
+        <div><div class="stat-k"><svg class="ico"><use href="#i-target"/></svg>Quête du jour</div>
+          <div class="stat-v" id="q-v"></div><div class="stat-note" id="q-note"></div></div>
+      </div>
+      <div class="stat">
+        <div style="min-width:0;flex:1"><div class="stat-k"><svg class="ico"><use href="#i-flame"/></svg>Série</div>
+          <div class="stat-v" id="s-v"></div><div class="stat-note" id="s-note"></div></div>
+      </div>
+      <div class="stat">
+        <div style="min-width:0;flex:1"><div class="stat-k"><svg class="ico"><use href="#i-star"/></svg>Points</div>
+          <div class="stat-v" id="p-v"></div>
+          <div class="bar" aria-hidden="true"><i id="p-bar"></i></div>
+          <div class="stat-note" id="p-note"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap section" id="pile">
+    <div class="grid-rev">
+      <div class="pile-col">
+        <div class="stack" id="stack" aria-live="polite"></div>
+        <div class="verdicts" role="group" aria-label="Verdict sur la notion affichée">
+          <button class="v-btn" data-v="ok"><span class="mark mark-ok"><svg><use href="#i-check"/></svg></span>Compris <span class="kbd">←</span></button>
+          <button class="v-btn" data-v="again"><span class="mark mark-again"><svg><use href="#i-redo"/></svg></span>À revoir <span class="kbd">↓</span></button>
+          <button class="v-btn" data-v="lost"><span class="mark mark-lost"><svg><use href="#i-x"/></svg></span>Perdue <span class="kbd">→</span></button>
+        </div>
+        <p class="honest">Chaque verdict rapporte 10 points, quel qu'il soit. Les bonus viennent du rattrapage, pas de la réponse.</p>
+      </div>
+
+      <aside class="aside" aria-label="Avancement">
+        <div class="panel quest">
+          <div class="panel-k"><span class="tag"><svg class="ico"><use href="#i-flag"/></svg>Projet du sprint</span><span class="status-line" id="pj-due"></span></div>
+          <h3 id="pj-title"></h3>
+          <p class="panel-sub" id="pj-brief"></p>
+          <ul class="checks" id="pj-checks"></ul>
+          <div class="bar" aria-hidden="true"><i id="pj-bar"></i></div>
+          <div class="reward"><span id="pj-count"></span><span>+40 par étape · +200 au rendu</span></div>
+        </div>
+        <div class="panel">
+          <div class="panel-k"><h3>Les 192 notions</h3></div>
+          <div class="tiles" id="tiles"></div>
+          <div class="integrity" id="integrity"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-k"><h3>Rattrapage</h3><span class="status-line">retour programmé</span></div>
+          <ul class="list" id="catchup"></ul>
+        </div>
+        <div class="panel">
+          <div class="panel-k"><h3>Flux Discord</h3><span class="tag"><svg class="ico"><use href="#i-msg"/></svg>#cortex</span></div>
+          <ul class="list" id="feed"></ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PARCOURS ======================= -->
+<section id="v-parcours" role="tabpanel" aria-labelledby="t-parcours" hidden>
+  <div class="wrap section">
+    <div class="section-head">
+      <h2>192 notions, 8 paliers.</h2>
+      <p>Chaque case est une notion. Elle se remplit à chaque passage réussi et s'ancre au troisième.</p>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="map" id="map"></div>
+
+    <div class="section-head" style="margin:80px 0 32px">
+      <h2>Paliers</h2>
+      <p>Un palier se gagne avec le projet rendu et au moins 20 notions jugées sur 24. Pas avec des points.</p>
+    </div>
+    <div class="paliers" id="paliers"></div>
+
+    <div class="section-head" style="margin:80px 0 32px">
+      <h2>Badges</h2>
+      <p>Ils récompensent la régularité et la lucidité, jamais la vitesse.</p>
+    </div>
+    <div class="badges" id="badges"></div>
+  </div>
+</section>
+
+<!-- ======================= PROMPT ======================= -->
+<section id="v-prompt" role="tabpanel" aria-labelledby="t-prompt" hidden>
+  <div class="wrap section">
+    <div class="section-head">
+      <h2>Le prompt des fiches</h2>
+      <p>Le prochain message généré utilise la version active.</p>
+    </div>
+    <div class="grid-prompt">
+      <div>
+        <label for="prompt" class="sr-only">Prompt système actif</label>
+        <textarea class="prompt" id="prompt" spellcheck="false"></textarea>
+        <div class="row-btns">
+          <button class="btn btn-primary" id="p-save">Enregistrer</button>
+          <button class="btn btn-ghost" id="p-reset">Rétablir le prompt d'origine</button>
+          <span class="status-line" id="p-status" role="status"></span>
+        </div>
+      </div>
+      <div class="aside">
+        <div class="panel">
+          <div class="panel-k"><h3>Variables</h3></div>
+          <p class="panel-sub" style="margin-bottom:14px">Un clic l'insère au curseur.</p>
+          <div class="vars" id="vars"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-k"><h3>Version active</h3></div>
+          <p class="tile-n" id="p-ver"></p>
+          <p class="panel-sub">Enregistrer crée une nouvelle ligne dans <code>Config</code>. L'ancienne reste consultable.</p>
+        </div>
+        <div class="panel quest">
+          <div class="panel-k"><span class="tag"><svg class="ico"><use href="#i-shield"/></svg>Garde-fou</span></div>
+          <p class="panel-sub" style="margin-top:0">Toute URL générée est testée en HTTP HEAD avant envoi. Statut différent de 200 : le lien est retiré du message.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= MESURE ======================= -->
+<section id="v-mesure" role="tabpanel" aria-labelledby="t-mesure" hidden>
+  <div class="wrap section">
+    <div class="job">
+      <span class="tag"><svg class="ico"><use href="#i-target"/></svg>Le job que CORTEX doit faire</span>
+      <q>Quand je reçois mes deux notions du jour, je veux juger honnêtement si je les tiens, pour que la répétition me ramène ce qui m'échappe sans que j'aie à m'en souvenir.</q>
+      <p>Tout ce qui suit mesure ce job-là. Le concurrent principal n'est ni Anki ni YouTube : c'est le plaisir de construire l'outil au lieu de suivre le programme.</p>
+    </div>
+
+    <div class="grid-ns">
+      <div class="panel">
+        <div class="panel-k"><span class="tag"><svg class="ico"><use href="#i-star"/></svg>Étoile polaire</span></div>
+        <h3>Notions jugées dans les 24 h</h3>
+        <p class="panel-sub">Sur les 14 derniers jours, notions reçues puis jugées avant la suivante. C'est la preuve qu'on suit le programme, pas qu'on l'admire.</p>
+        <p class="hero-num" id="ns-v"></p>
+        <p class="panel-sub" id="ns-note"></p>
+      </div>
+      <div class="panel">
+        <div class="panel-k"><h3>Par jour, 14 derniers jours</h3><button class="link-btn" id="ns-toggle" aria-expanded="false">Voir en tableau</button></div>
+        <div class="chart" id="ns-chart"></div>
+        <div id="ns-table" hidden></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:24px">
+      <div class="panel-k"><h3>Garde-fous</h3><span class="status-line">s'ils sortent de la cible, on ralentit</span></div>
+      <div class="scroll-x"><table class="t" id="guards"></table></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-k"><h3>Indicateurs avancés</h3></div>
+        <div class="scroll-x"><table class="t" id="inputs"></table></div>
+      </div>
+      <div class="panel">
+        <div class="panel-k"><h3>Plan de réponse</h3></div>
+        <div class="scroll-x"><table class="t" id="response"></table></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-k"><h3>Événements de cette session</h3><button class="link-btn" id="evt-clear">Réinitialiser la démo</button></div>
+        <p class="panel-sub" style="margin-bottom:12px">Stockés dans ce navigateur. En production, <code>verdict_donne</code> alimente la table <code>Evenements</code>.</p>
+        <ol class="list" id="evts" reversed></ol>
+      </div>
+      <div class="panel">
+        <div class="panel-k"><h3>Ce qui est mesuré</h3></div>
+        <div class="scroll-x"><table class="t" id="spec"></table></div>
+        <p class="simu" style="margin-top:14px">Aucune donnée personnelle, aucun service tiers. Une seule utilisatrice, qui lit ses propres chiffres.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<p class="foot wrap">Prototype · état simulé · jour <span id="f-jour"></span> du programme</p>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   Données réelles : 192 intitulés dans l'ordre d'envoi.
+   Sprint = 24 notions consécutives. Créneau = parité de l'ordre
+   (impair Matin, pair Soir), vérifié sur le CSV source.
+   ============================================================ */
+const TITRES = ["Scalaire, vecteur, matrice, tenseur","Espace vectoriel, base, dimension","Produit scalaire et norme","Produit matriciel et coût de calcul","Transposée, inverse, pseudo-inverse","Déterminant et rang","Application linéaire et changement de base","Valeurs propres et vecteurs propres","Décomposition en valeurs singulières (SVD)","PCA vue comme une rotation","Matrices creuses et empreinte mémoire","Broadcasting et vectorisation NumPy","Limite, continuité, notation asymptotique","Dérivée et pente d'une courbe","Dérivées partielles","Gradient et direction de plus forte pente","Règle de la chaîne","Matrice jacobienne","Hessienne et courbure","Développement de Taylor à l'ordre 2","Convexité et unicité du minimum","Différentiation automatique, mode direct et inverse","Graphe de calcul","Backpropagation comme règle de la chaîne appliquée","Espace probabilisé, événement, indépendance","Probabilité conditionnelle","Théorème de Bayes","Variables aléatoires discrètes et continues","Espérance, variance, écart-type","Covariance et corrélation","Bernoulli et binomiale","Loi normale et théorème central limite","Poisson, exponentielle, uniforme","Vraisemblance et maximum de vraisemblance","Prior, posterior, estimation MAP","Entropie, entropie croisée, divergence KL","Échantillonnage et biais d'échantillonnage","Intervalle de confiance","Test d'hypothèse, p-value, erreurs I et II","A/B testing et puissance statistique","Paradoxe de Simpson et causalité","Fonction de coût et paysage d'erreur","Descente de gradient batch, stochastique, mini-batch","Learning rate et scheduling","Momentum, RMSProp, Adam, AdamW","Régularisation L1 et L2","Minimum local, point-selle, plateau","Optimisation sous contrainte et Lagrange","Cycle de vie de la donnée","OLTP et OLAP","Modélisation relationnelle et normalisation","SQL : jointures, agrégations, fonctions fenêtre","NoSQL : document, clé-valeur, colonne, graphe","Data warehouse, data lake, lakehouse","ETL et ELT","Orchestration et DAG (Airflow, Dagster)","Batch et streaming, architecture événementielle","Idempotence et rejouabilité d'un pipeline","Partitionnement et formats colonnes (Parquet)","Data contract et évolution de schéma","Qualité de données : complétude, fraîcheur, unicité","Data lineage et catalogage","RGPD, minimisation, anonymisation, pseudonymisation","Valeurs manquantes et stratégies d'imputation","Détection et traitement des valeurs aberrantes","Normalisation, standardisation, mise à l'échelle robuste","Encodage catégoriel : one-hot, ordinal, target","Feature engineering et variables temporelles","Réduction de dimension : PCA, t-SNE, UMAP","Déséquilibre de classes, SMOTE, pondération","Fuite de données (data leakage)","Split train / validation / test et validation croisée","Supervisé, non supervisé, semi-supervisé","Compromis biais-variance","Sur-apprentissage et sous-apprentissage","Régression linéaire simple et multiple","Moindres carrés et solution analytique","Ridge, Lasso, ElasticNet","Régression logistique et sigmoïde","Frontière de décision","Matrice de confusion","Précision, rappel, F1","ROC, AUC, courbe précision-rappel","MAE, RMSE, R² et leurs pièges","Arbre de décision, entropie et Gini","Profondeur et élagage","Bagging et Random Forest","Boosting : AdaBoost, Gradient Boosting","XGBoost, LightGBM, CatBoost","SVM et notion de marge","Astuce du noyau (kernel trick)","k plus proches voisins","Naive Bayes","K-means et méthode du coude","Clustering hiérarchique et DBSCAN","Interprétabilité : importance des variables, SHAP, LIME","Neurone formel et perceptron","Perceptron multicouche","Activations : ReLU, GELU, sigmoïde, tanh","Initialisation des poids : Xavier, He","Forward pass et backward pass","Fonctions de perte usuelles en DL","Batch norm et layer norm","Dropout et régularisation en DL","Gradients qui s'évanouissent ou explosent","Gradient clipping","Convolution : noyau, stride, padding","Pooling et champ réceptif","LeNet, ResNet, connexions résiduelles","Transfer learning et fine-tuning","Augmentation de données","RNN et dépendance temporelle","LSTM : portes d'oubli, d'entrée, de sortie","GRU et arbitrage coût / performance","Seq2seq et encodeur-décodeur","Autoencodeur et espace latent","Autoencodeur variationnel (VAE)","GAN : générateur, discriminateur, effondrement de mode","Modèles de diffusion, le principe","Embeddings et espaces de représentation","Mécanisme d'attention","Self-attention : query, key, value","Attention multi-têtes","Encodage positionnel, absolu et RoPE","Architecture Transformer complète","Encoder-only, decoder-only, encoder-decoder","Tokenisation : BPE, SentencePiece","Pré-entraînement et objectif de langage","Lois d'échelle (scaling laws)","Fine-tuning supervisé (SFT)","LoRA, QLoRA, PEFT","Quantization : INT8, INT4, GGUF","Distillation de modèle","Mixture of Experts","Fenêtre de contexte et attention longue","MDP : état, action, récompense, politique","Fonction de valeur et équation de Bellman","Q-learning et Deep Q-Network","Policy gradient et REINFORCE","Actor-critic et PPO","Exploration et exploitation","RLHF et modèle de récompense","DPO et alternatives au RLHF","Alignement, red teaming, jailbreak","Anatomie d'une requête LLM : prompt, complétion, tokens","Température, top-p, top-k, sampling","Prompting structuré et few-shot","Chain of thought et raisonnement explicite","Sortie structurée et function calling","Embeddings de texte et similarité cosinus","Bases vectorielles : index HNSW, IVF","Chunking : taille, recouvrement, stratégies","RAG naïf : ingestion, retrieval, génération","Recherche hybride BM25 + vectoriel","Reranking et cross-encoders","RAG agentique et réécriture de requête","GraphRAG et RAG structuré","Évaluation d'un RAG : RAGAS, groundedness, recall","Hallucination : causes et atténuation","Mémoire court terme, long terme, épisodique","Compaction et résumé de contexte","Context engineering et budget de contexte","Boucle d'agent : outils, planification, arrêt","Multi-agents et orchestration","Sandboxing et exécution de code non fiable","Observabilité LLM : traces, spans, LLM-as-judge","Coût d'inférence : tokens, cache, batching, latence","Injection de prompt et sécurité des agents","Cycle de vie d'un modèle en production","Tracking d'expériences : MLflow, W&B","Versionnage des données et des modèles (DVC)","Feature store","Model registry et promotion","CI/CD appliqué au ML","Tests de modèle et tests de données","Déploiement : batch, temps réel, edge","Serving : API, gRPC, vLLM, TGI","Monitoring : dérive de données, dérive de concept","Réentraînement et boucle de feedback","Shadow deployment, canary, rollback","Infrastructure GPU, coût, capacity planning","Docker et Kubernetes","Infrastructure as code","Monolithe et microservices","REST, GraphQL, webhooks","Files de messages et traitement asynchrone","Théorème CAP et niveaux de cohérence","Sharding, réplication, partitionnement","Idempotence, retry, backoff, circuit breaker","Stratégies de cache et invalidation","Observabilité système : logs, métriques, traces","Sécurité applicative : secrets, authn/authz, OWASP"];
+const SPRINTS = [{"id":"S01","nom":"Algèbre linéaire & calcul différentiel","sem":"Sem. 1-2","dom":"Maths","projet":"Régression linéaire from scratch"},{"id":"S02","nom":"Probabilités, statistiques & optimisation","sem":"Sem. 3-4","dom":"Maths","projet":"Une vraie analyse statistique"},{"id":"S03","nom":"Data engineering & preprocessing","sem":"Sem. 5-6","dom":"Data","projet":"Un pipeline ETL de bout en bout"},{"id":"S04","nom":"Machine learning classique","sem":"Sem. 7-8","dom":"ML","projet":"Cinq modèles, un verdict"},{"id":"S05","nom":"Deep learning","sem":"Sem. 9-10","dom":"DL","projet":"Un CNN et un détecteur d'anomalie"},{"id":"S06","nom":"Transformers, LLM & apprentissage par renforcement","sem":"Sem. 11-12","dom":"LLM & RL","projet":"Votre micro-GPT"},{"id":"S07","nom":"IA appliquée : RAG, mémoire, agents","sem":"Sem. 13-14","dom":"IA appliquée","projet":"Un RAG que vous pouvez défendre en entretien"},{"id":"S08","nom":"MLOps, architecture & systèmes distribués","sem":"Sem. 15-16","dom":"MLOps & Archi","projet":"Mettre le RAG en production"}];
+
+const notion = (o) => ({
+  ordre: o,
+  titre: TITRES[o - 1],
+  sprint: SPRINTS[Math.floor((o - 1) / 24)],
+  creneau: o % 2 === 1 ? "Matin" : "Soir",
+});
+
+/* ---- État simulé, cohérent : 25 + 6 + 3 + 2 + 156 = 192 ---- */
+const PERDUES = [9, 21, 26];
+const A_REVOIR = [12, 17, 20, 27, 30, 33];
+const ENVOYEES = [35, 36];
+
+const statuts = {};
+for (let o = 1; o <= 192; o++) statuts[o] = "avenir";
+for (let o = 1; o <= 34; o++) statuts[o] = "comprise";
+PERDUES.forEach((o) => (statuts[o] = "perdue"));
+A_REVOIR.forEach((o) => (statuts[o] = "revoir"));
+ENVOYEES.forEach((o) => (statuts[o] = "envoyee"));
+
+const retours = { 9: "demain", 21: "dans 2 j", 26: "dans 3 j" };
+
+/* File du jour : révisions échues puis notions du jour, triées par ordre. */
+let queue = [...A_REVOIR, ...ENVOYEES].sort((a, b) => a - b);
+let traitees = 0;
+
+const flux = [
+  { h: "07:42", v: "comprise", quoi: "034 Vraisemblance et maximum de vraisemblance", src: "discord" },
+  { h: "07:41", v: "comprise", quoi: "032 Loi normale et théorème central limite", src: "discord" },
+  { h: "hier 19:58", v: "revoir", quoi: "033 Poisson, exponentielle, uniforme", src: "dashboard" },
+  { h: "hier 19:55", v: "comprise", quoi: "031 Bernoulli et binomiale", src: "clavier" },
+  { h: "hier 08:03", v: "perdue", quoi: "026 Probabilité conditionnelle", src: "discord" },
+  { h: "avant-hier", v: "comprise", quoi: "029 Espérance, variance, écart-type", src: "discord" },
+];
+
+const CHECKLIST = [
+  { t: "Jeu de données choisi et nettoyé", done: true },
+  { t: "Distributions tracées et commentées", done: true },
+  { t: "Intervalle de confiance calculé à la main puis vérifié", done: false },
+  { t: "Test d'hypothèse posé avant de voir le résultat", done: false },
+  { t: "Rapport de 2 pages, limites incluses", done: false },
+];
+
+/* ============================================================
+   Fiches d'exemple. Format matin : une phrase, le problème,
+   l'intuition, le piège. Format soir : rappel, code, exercice.
+   Liens limités aux domaines de la liste blanche.
+   ============================================================ */
+const FICHES = {
+  12: {
+    type: "soir",
+    rappel: "Broadcasting : NumPy étire virtuellement les dimensions de taille 1 pour aligner deux tableaux de formes différentes, sans jamais recopier la mémoire. Vectoriser, c'est remplacer une boucle Python par une opération sur le tableau entier.",
+    code: `import numpy as np
+X = np.random.randn(1000, 3)     # 1000 points, 3 variables
+mu = X.mean(axis=0)              # forme (3,)
+sigma = X.std(axis=0)            # forme (3,)
+# (1000, 3) face a (3,) : la dimension 3 s'aligne,
+# mu est etire sur les 1000 lignes sans copie
+Xn = (X - mu) / sigma            # centrage-reduction, zero boucle
+mu_col = mu.reshape(3, 1)        # forme (3, 1)
+# (1000, 3) face a (3, 1) : plus rien ne s'aligne, NumPy leve une erreur
+print(Xn.shape, Xn.mean(axis=0).round(6))`,
+    exercice: "Reprenez une boucle for écrite récemment sur un tableau et réécrivez-la sans boucle. Chronométrez les deux versions avec time.perf_counter et notez le rapport obtenu.",
+  },
+  17: {
+    type: "matin",
+    phrase: "La dérivée d'une composition de fonctions est le produit des dérivées de chaque étape, chacune évaluée là où sa propre étape a atterri.",
+    probleme: "Un réseau est une pile de transformations. Vous voulez savoir de combien bouge la perte quand vous bougez un poids situé douze couches plus tôt. La règle de la chaîne est le seul chemin qui relie les deux bouts.",
+    intuition: "Une chaîne de composants où chacun transmet une valeur au suivant. Si vous changez le pas de la grille de 1 px et que chaque composant amplifie ce changement d'un facteur connu, l'effet total sur la dernière vue est le produit de tous les facteurs. La rétropropagation ne fait rien d'autre, en remontant la pile.",
+    formule: "d(perte)/d(w) = d(perte)/d(a3) x d(a3)/d(a2) x d(a2)/d(w)\nw : le poids, a2 et a3 : les sorties des couches 2 et 3",
+    piege: "Évaluer tous les facteurs au même point. Chacun se calcule à la valeur que son étape a réellement produite pendant la passe avant. C'est pour cela qu'on garde toutes les activations en mémoire, et c'est exactement ce qui fait exploser la RAM sur les grands modèles.",
+  },
+  20: {
+    type: "soir",
+    rappel: "Autour d'un point, une fonction se remplace par une parabole : sa valeur, sa pente, sa courbure. L'ordre 2 est le premier terme qui vous dit si vous êtes dans une cuvette ou sur une crête.",
+    code: `import numpy as np
+f  = lambda x: np.log(1 + np.exp(x))       # softplus
+d1 = lambda x: 1 / (1 + np.exp(-x))        # pente
+d2 = lambda x: d1(x) * (1 - d1(x))         # courbure
+a  = 0.0                                    # point de developpement
+h  = np.linspace(-1.5, 1.5, 7)             # ecarts autour de a
+t2 = f(a) + d1(a) * h + 0.5 * d2(a) * h**2 # approximation ordre 2
+err = np.abs(f(a + h) - t2)                # erreur reelle
+# L'erreur croit comme h**3 : diviser h par 2 la divise par 8 environ
+print(np.round(err, 5))`,
+    exercice: "Faites glisser le point de développement a de 0 à 4 sur le même intervalle. Repérez à partir de quand l'approximation devient inutilisable, et écrivez en une phrase pourquoi.",
+  },
+  27: {
+    type: "matin",
+    phrase: "La probabilité d'une cause sachant l'effet, reconstruite à partir de la probabilité de l'effet sachant la cause.",
+    probleme: "Vous observez un résultat et vous voulez remonter à ce qui l'a produit : un test positif, un clic, une panne. Bayes est la seule façon propre de renverser le conditionnement.",
+    intuition: "Une carte de chaleur d'interface. Savoir où les gens cliquent quand ils cherchent un prix ne dit pas ce qu'ils cherchaient quand ils ont cliqué là. Bayes fait la traduction entre les deux, à condition de connaître la fréquence de base de chaque intention.",
+    formule: "P(A | B) = P(B | A) x P(A) / P(B)\nA : la cause, B : l'effet observé, P(A) : la fréquence de base de la cause",
+    piege: "Oublier la fréquence de base. Un test fiable à 99 % sur une maladie qui touche 1 personne sur 10 000 produit surtout des faux positifs : le taux de base écrase la fiabilité du test, et l'intuition se trompe de deux ordres de grandeur.",
+  },
+  30: {
+    type: "soir",
+    rappel: "La covariance dit si deux variables s'écartent de leur moyenne dans le même sens, exprimée dans leurs unités d'origine. La corrélation est la même mesure ramenée entre -1 et 1, donc comparable d'un jeu de données à l'autre.",
+    code: `import numpy as np
+rng = np.random.default_rng(0)
+x = rng.normal(size=500)
+y = 2 * x + rng.normal(scale=0.5, size=500)  # lien lineaire net
+z = x**2                                      # lien fort, non lineaire
+cov = np.cov(x, y)[0, 1]                      # depend des unites
+cor = np.corrcoef(x, y)[0, 1]                 # sans unite, dans [-1, 1]
+print(round(cov, 3), round(cor, 3))           # environ 2.0 et 0.97
+# Dependance parfaite mais courbe : la correlation ne la voit pas
+print(round(np.corrcoef(x, z)[0, 1], 3))      # proche de 0`,
+    exercice: "Tracez le nuage de x contre z. En une phrase, dites ce qu'une corrélation nulle vous autorise et ne vous autorise pas à conclure.",
+  },
+  33: {
+    type: "matin",
+    phrase: "Trois lois pour trois questions : combien d'événements dans un intervalle, combien de temps avant le prochain, et quelle valeur quand aucune n'est privilégiée.",
+    probleme: "Vos données de comptage ne sont pas gaussiennes. Le nombre de requêtes par minute, le délai entre deux pannes, un tirage sans information préalable : chacun a sa loi, et prendre la normale par réflexe fausse tous les intervalles que vous en tirez.",
+    intuition: "Poisson et exponentielle décrivent le même flux vu de deux côtés. Poisson compte les événements par fenêtre de temps, exponentielle mesure l'attente entre deux. Taux de 3 par minute, attente moyenne d'un tiers de minute. L'uniforme, elle, est l'aveu d'ignorance assumé.",
+    piege: "Supposer le taux constant. Un site n'a pas le même trafic à 3 h et à 14 h. Ajuster une seule Poisson sur les 24 heures sous-estime la variance et produit des alertes qui se déclenchent en permanence.",
+  },
+  35: {
+    type: "matin",
+    phrase: "Le prior est ce que vous croyiez avant les données, le posterior ce que vous croyez après, et le MAP la valeur la plus probable de ce posterior.",
+    probleme: "Le maximum de vraisemblance ne regarde que les données observées. Avec dix observations, il vous donne une réponse confiante et fausse. Le prior est le moyen formel d'injecter ce que vous saviez déjà.",
+    intuition: "Le prior joue le rôle d'une grille de mise en page : il ne dessine rien lui-même, il contraint où les choses peuvent atterrir. Avec peu de données, la grille domine la composition. Avec beaucoup, le contenu la fait presque oublier.",
+    formule: "posterior ∝ vraisemblance x prior\nMAP : la valeur de theta qui maximise ce produit",
+    piege: "Croire que le prior est une option. Vous en posez toujours un. La régularisation L2 que vous ajoutez par réflexe est très exactement un prior gaussien centré sur zéro. La seule question est de savoir si vous l'avez choisi ou subi.",
+  },
+  36: {
+    type: "soir",
+    rappel: "L'entropie mesure l'incertitude d'une distribution. L'entropie croisée mesure le coût de coder la vraie distribution avec vos prédictions. L'écart entre les deux est la divergence KL, et c'est ce que votre modèle minimise réellement.",
+    code: `import numpy as np
+p = np.array([0.7, 0.2, 0.1])   # vraie distribution
+q = np.array([0.5, 0.3, 0.2])   # ce que le modele predit
+H  = -(p * np.log(p)).sum()     # entropie de p
+CE = -(p * np.log(q)).sum()     # entropie croisee de p vers q
+KL = (p * np.log(p / q)).sum()  # divergence KL
+print(round(H, 4), round(CE, 4), round(KL, 4))
+print(round(CE - H, 4))         # egal a KL : CE = H + KL
+# KL n'est pas symetrique : inverser p et q change le resultat
+print(round((q * np.log(q / p)).sum(), 4))`,
+    exercice: "Mettez q[2] à 0.001, puis à 0. Observez ce qui casse, et déduisez pourquoi toutes les implémentations ajoutent un epsilon.",
+  },
+};
+
+const SOURCES = {"notions":[{"ordre":12,"sprint":"S01","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Broadcasting%20et%20vectorisation%20NumPy","requete":"Broadcasting et vectorisation NumPy"},"en":{"label":"3Blue1Brown","url":"https://www.youtube.com/@3blue1brown/search?query=broadcasting%20vectorization%20numpy","requete":"broadcasting vectorization numpy"}},{"ordre":17,"sprint":"S01","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=R%C3%A8gle%20de%20la%20cha%C3%AEne","requete":"Règle de la chaîne"},"en":{"label":"3Blue1Brown","url":"https://www.youtube.com/@3blue1brown/search?query=chain%20rule","requete":"chain rule"}},{"ordre":20,"sprint":"S01","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=D%C3%A9veloppement%20de%20Taylor%20%C3%A0%20l'ordre%202","requete":"Développement de Taylor à l'ordre 2"},"en":{"label":"3Blue1Brown","url":"https://www.youtube.com/@3blue1brown/search?query=taylor%20series%20ordre","requete":"taylor series ordre"}},{"ordre":27,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Th%C3%A9or%C3%A8me%20de%20Bayes","requete":"Théorème de Bayes"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=bayes%20theorem","requete":"bayes theorem"}},{"ordre":30,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Covariance%20et%20corr%C3%A9lation","requete":"Covariance et corrélation"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=covariance%20correlation","requete":"covariance correlation"}},{"ordre":33,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Poisson%2C%20exponentielle%2C%20uniforme","requete":"Poisson, exponentielle, uniforme"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=poisson%20exponentielle%20uniforme","requete":"poisson exponentielle uniforme"}},{"ordre":35,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Prior%2C%20posterior%2C%20estimation%20MAP","requete":"Prior, posterior, estimation MAP"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=prior%20posterior%20estimation%20map","requete":"prior posterior estimation map"}},{"ordre":36,"sprint":"S02","fr":{"label":"Machine Learnia","url":"https://www.youtube.com/@MachineLearnia/search?query=Entropie%2C%20entropie%20crois%C3%A9e%2C%20divergence%20KL","requete":"Entropie, entropie croisée, divergence KL"},"en":{"label":"StatQuest","url":"https://www.youtube.com/@statquest/search?query=entropy%20cross%20kl%20divergence","requete":"entropy cross kl divergence"}}],"sprints":[{"id":"S01","chaineFr":"Machine Learnia","chaineEn":"3Blue1Brown","playlists":[{"label":"Essence of linear algebra","url":"https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"},{"label":"Essence of calculus","url":"https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"}],"docs":[{"label":"scikit-learn","url":"https://scikit-learn.org"}]},{"id":"S02","chaineFr":"Machine Learnia","chaineEn":"StatQuest","playlists":[{"label":"Statistics Fundamentals","url":"https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9"}],"docs":[{"label":"scikit-learn","url":"https://scikit-learn.org"},{"label":"Google ML","url":"https://developers.google.com/machine-learning"}]},{"id":"S03","chaineFr":"Machine Learnia","chaineEn":"StatQuest","playlists":[],"docs":[{"label":"Made With ML","url":"https://madewithml.com"},{"label":"Google ML","url":"https://developers.google.com/machine-learning"}]},{"id":"S04","chaineFr":"Machine Learnia","chaineEn":"StatQuest","playlists":[],"docs":[{"label":"scikit-learn","url":"https://scikit-learn.org"},{"label":"Google ML","url":"https://developers.google.com/machine-learning"}]},{"id":"S05","chaineFr":"Thibault Neveu","chaineEn":"3Blue1Brown","playlists":[{"label":"Neural networks","url":"https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"}],"docs":[{"label":"karpathy.ai","url":"https://karpathy.ai"}]},{"id":"S06","chaineFr":"Thibault Neveu","chaineEn":"3Blue1Brown","playlists":[{"label":"Neural Networks: Zero to Hero","url":"https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ"}],"docs":[{"label":"Jay Alammar","url":"https://jalammar.github.io"},{"label":"karpathy.ai","url":"https://karpathy.ai"}]},{"id":"S07","chaineFr":"Thibault Neveu","chaineEn":null,"playlists":[],"docs":[{"label":"Lilian Weng","url":"https://lilianweng.github.io"},{"label":"Hugging Face Learn","url":"https://huggingface.co/learn"}]},{"id":"S08","chaineFr":null,"chaineEn":null,"playlists":[],"docs":[{"label":"Made With ML","url":"https://madewithml.com"},{"label":"Google ML","url":"https://developers.google.com/machine-learning"}]}]};
+
+const PROMPT_ORIGINE = `Tu rédiges une fiche de notion pour Opaline, product designer avec
+10 ans de métier, qui code (HTML/CSS/JS, Python en apprentissage)
+et construit des systèmes automatisés depuis 2 ans. Elle n'a pas
+de formation mathématique supérieure récente. Elle apprend l'IA
+au niveau ingénieur, pas au niveau vulgarisation.
+
+NOTION : {notion}
+SPRINT : {sprint} / {domaine}
+DÉJÀ VUES : {liste_des_5_dernieres}
+MOMENT : {creneau}
+
+RÈGLES
+1. Français. Vouvoiement. Pas de tiret cadratin.
+2. Aucune analogie avec la cuisine, le sport ou les recettes.
+   Si une analogie est nécessaire, prends-la dans le design
+   d'interface, la typographie ou l'architecture de l'information.
+3. Tu peux utiliser librement les notions listées dans DÉJÀ VUES.
+   Toute notion non vue doit être définie en une incise ou évitée.
+4. Une formule mathématique maximum, et seulement si elle éclaire.
+   Toujours nommer chaque symbole.
+5. Le champ PIÈGE est obligatoire et doit contenir une erreur
+   réellement fréquente, pas une mise en garde générique.
+6. Sections matin : EN UNE PHRASE / LE PROBLÈME QU'ELLE RÉSOUT /
+   L'INTUITION / LE PIÈGE, puis 1 lien FR et 1 lien EN.
+   Sections soir : RAPPEL 2 LIGNES / CE QUE ÇA DONNE EN CODE
+   (10 lignes commentées) / EXERCICE (une consigne, 15 min max),
+   puis 1 vidéo et 1 tuto.
+7. Longueur totale : 250 mots maximum hors code.
+8. Les liens viennent exclusivement de la liste blanche fournie.
+   Si tu n'as pas de lien fiable pour une langue, écris
+   « pas de ressource FR retenue » plutôt que d'inventer une URL.`;
+
+const VARIABLES = ["{notion}", "{sprint}", "{domaine}", "{creneau}", "{liste_des_5_dernieres}", "{ordre}", "{passages}", "{projet_sprint}"];
+
+
+/* ============================================================
+   Gamification et mesure : constantes du prototype
+   ============================================================ */
+const JOUR = 18;                 // notions 35 et 36 reçues aujourd'hui
+const SPRINT_EN_COURS = 1;       // index de S02
+const RENDU_DANS = 9;            // jours avant le samedi de clôture
+const PALIERS = ["Algébriste", "Probabiliste", "Data engineer", "Modélisatrice", "Neuronale", "Architecte de LLM", "Bâtisseuse d'agents", "Opératrice MLOps"];
+const PTS = { verdict: 10, rattrapee: 25, ancree: 50, etape: 40, rendu: 200 };
+const PALIER_PTS = 2000;         // seuil d'affichage de la barre de points
+
+/* Passages réussis simulés : sprint 1 bien avancé, sprint 2 au premier passage. */
+const passages = {};
+for (let o = 1; o <= 192; o++) passages[o] = 0;
+for (let o = 1; o <= 24; o++) passages[o] = o % 3 === 0 ? 3 : 2;
+for (let o = 25; o <= 34; o++) passages[o] = 1;
+[12, 17].forEach((o) => (passages[o] = 2));
+[20, 27, 30, 33].forEach((o) => (passages[o] = 1));
+PERDUES.forEach((o) => (passages[o] = 0));
+const ancreesBase = Object.keys(passages).filter((o) => passages[o] >= 3).length;
+
+/* Historique des 17 jours précédents : jour:reçues:jugées en 24 h:minutes:perdues.
+   Dimanches (7, 14) : révision seule. Jour 5 manqué, couvert par le joker du sprint 1. */
+const HIST = "1:2:2:31:1,2:2:2:28:0,3:2:1:44:1,4:2:2:36:0,5:2:0:0:0,6:2:2:39:1,7:0:0:22:0,8:2:1:47:1,9:2:2:35:0,10:2:2:33:0,11:2:2:41:1,12:2:2:38:0,13:2:2:33:1,14:0:0:25:0,15:2:2:42:1,16:2:2:36:0,17:2:2:40:1"
+  .split(",").map((s) => { const [j, r, v, m, p] = s.split(":").map(Number); return { j, recues: r, j24: v, min: m, perdues: p }; });
+const JOKERS = { 5: "S01" };
+
+/* ============================================================
+   État persistant de la démo (navigateur uniquement)
+   ============================================================ */
+const CLE = "cortex.gamifie.v1";
+const etatInitial = () => ({ faits: {}, gains: [], evts: [], cases: CHECKLIST.map((c) => c.done), prompt: null, version: 3, ressenti: null });
+let E = etatInitial();
+try { const s = JSON.parse(localStorage.getItem(CLE) || "null"); if (s && s.version) E = Object.assign(etatInitial(), s); } catch (e) {}
+const sauver = () => { try { localStorage.setItem(CLE, JSON.stringify(E)); } catch (e) {} };
+
+/* Rejoue les verdicts déjà donnés dans cette démo sur l'état simulé. */
+const baseStatuts = { ...statuts }, basePassages = { ...passages };
+
+/* ============================================================
+   Télémétrie : une seule porte d'entrée
+   ============================================================ */
+function track(nom, props = {}) {
+  const e = { t: new Date().toISOString(), nom, props };
+  E.evts.push(e);
+  if (E.evts.length > 200) E.evts.shift();
+  sauver();
+  console.debug("[cortex]", nom, props);
+  if (!document.getElementById("v-mesure").hidden) rendreEvts();
+}
+
+/* ============================================================
+   applyVerdict : seule fonction qui écrit un statut (règle 2).
+   Mêmes règles que data.md. Retourne les gains de points.
+   ============================================================ */
+const RETOUR = { ok: (p) => [1, 7, 30][Math.min(p - 1, 2)], again: () => 2, lost: () => 3 };
+function applyVerdict(ordre, verdict, source) {
+  const avant = statuts[ordre], pAvant = passages[ordre];
+  if (verdict === "ok") { statuts[ordre] = "comprise"; passages[ordre] = pAvant + 1; }
+  if (verdict === "again") { statuts[ordre] = "revoir"; }
+  if (verdict === "lost") { statuts[ordre] = "perdue"; passages[ordre] = 0; }
+  const jours = verdict === "ok" ? RETOUR.ok(passages[ordre]) : RETOUR[verdict]();
+  retours[ordre] = jours === 1 ? "demain" : `dans ${jours} j`;
+
+  const gains = [{ pts: PTS.verdict, quoi: "verdict donné" }];
+  if (verdict === "ok" && (avant === "revoir" || avant === "perdue")) gains.push({ pts: PTS.rattrapee, quoi: "notion rattrapée" });
+  if (verdict === "ok" && passages[ordre] === 3) gains.push({ pts: PTS.ancree, quoi: "notion ancrée, sortie du cycle" });
+  return { avant, apres: statuts[ordre], pAvant, pApres: passages[ordre], jours, gains };
+}
+
+/* ============================================================
+   Calculs dérivés
+   ============================================================ */
+const VLIB = { ok: "Compris", again: "À revoir", lost: "Perdue" };
+const VCLS = { ok: "ok", again: "again", lost: "lost" };
+const VICO = { ok: "i-check", again: "i-redo", lost: "i-x" };
+const STATUT_V = { comprise: "ok", revoir: "again", perdue: "lost" };
+
+function compte() {
+  const c = { comprise: 0, revoir: 0, perdue: 0, avenir: 0, envoyee: 0 };
+  for (let o = 1; o <= 192; o++) c[statuts[o]]++;
+  return c;
+}
+/* Acquis simulés avant aujourd'hui : verdicts, rattrapages, ancrages, projet S01 (5 étapes + rendu). */
+const pointsBase = () => 61 * PTS.verdict + 4 * PTS.rattrapee + ancreesBase * PTS.ancree + 5 * PTS.etape + PTS.rendu;
+const pointsJour = () => E.gains.reduce((s, g) => s + g.pts, 0);
+const points = () => pointsBase() + pointsJour() + E.cases.filter(Boolean).length * PTS.etape;
+const ancrees = () => Object.values(passages).filter((p) => p >= 3).length;
+const fileTotale = () => FILE.length;
+const restantes = () => FILE.filter((o) => !E.faits[o]).length;
+const journeeTenue = () => restantes() === 0;
+
+function serie() {
+  // Jours tenus consécutifs depuis la fin de l'historique ; un joker couvre un jour manqué.
+  let n = 0;
+  for (let i = HIST.length - 1; i >= 0; i--) {
+    const h = HIST[i];
+    if (h.min > 0) n++;
+    else if (JOKERS[h.j]) continue;
+    else break;
+  }
+  return n + (journeeTenue() ? 1 : 0);
+}
+
+/* ============================================================
+   Rendu : utilitaires
+   ============================================================ */
+const $ = (s) => document.querySelector(s);
+const pad3 = (n) => String(n).padStart(3, "0");
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const ico = (id) => `<svg class="ico" aria-hidden="true"><use href="#${id}"/></svg>`;
+const fmt = (n) => n.toLocaleString("fr-FR");
+const reduit = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function toast(gains) {
+  gains.forEach((g, i) => setTimeout(() => {
+    const t = document.createElement("div");
+    t.className = "toast";
+    t.innerHTML = `<b>${g.pts != null ? "+" + g.pts : "✓"}</b> ${esc(g.quoi)}`;
+    $("#toasts").appendChild(t);
+    setTimeout(() => t.remove(), 2700);
+  }, i * 380));
+}
+
+/* ============================================================
+   Bandeau et statistiques
+   ============================================================ */
+const FILE = [...queue];
+let fileVue = FILE.filter((o) => !E.faits[o]);
+
+function rendreHero() {
+  const sp = SPRINTS[SPRINT_EN_COURS], r = restantes(), tot = fileTotale();
+  const nouvelles = FILE.filter((o) => baseStatuts[o] === "envoyee").length;
+  $("#hero-tag span").textContent = `${sp.id} · ${sp.nom}`;
+  const [l1, l2] = $("#hero-h1").children;
+  l1.textContent = `Jour ${JOUR}.`;
+  l2.textContent = r === 0 ? "Journée tenue." : `${r} carte${r > 1 ? "s" : ""} à juger.`;
+  $("#hero-sub").textContent = r === 0
+    ? "Tout est jugé. La prochaine fiche arrive demain à 7 h 30, les notions perdues reviennent dans 3 jours."
+    : `${nouvelles} notions nouvelles, ${tot - nouvelles} révisions échues. Environ ${Math.round(r * 3.5)} minutes. Dire Perdue rapporte autant que Compris.`;
+  $("#go").textContent = r === 0 ? "Voir le parcours" : (r === tot ? "Commencer la séance" : "Reprendre la séance");
+  $("#go").setAttribute("href", r === 0 ? "#" : "#pile");
+
+  const fait = tot - r, C = 2 * Math.PI * 32, fg = $("#ring .r-fg");
+  fg.style.strokeDasharray = C;
+  fg.style.strokeDashoffset = C * (1 - fait / tot);
+  $("#ring text").textContent = `${fait}/${tot}`;
+  $("#ring").setAttribute("aria-label", `${fait} cartes jugées sur ${tot}`);
+  $("#q-v").innerHTML = r === 0 ? "Tenue" : `${r} <small>restantes</small>`;
+  $("#q-note").textContent = r === 0 ? "+1 jour de série" : "La série avance quand la file est vide";
+
+  const s = serie();
+  $("#s-v").innerHTML = `${s} <small>jour${s > 1 ? "s" : ""}</small>`;
+  $("#s-note").textContent = "1 joker en réserve pour ce sprint";
+  $("#nav-serie span").textContent = `${s} j`;
+
+  const p = points();
+  $("#p-v").textContent = fmt(p);
+  $("#p-bar").style.width = `${Math.min(100, (p / PALIER_PTS) * 100)}%`;
+  $("#p-note").textContent = `+${pointsJour()} aujourd'hui`;
+  $("#f-jour").textContent = JOUR;
+}
+
+/* ============================================================
+   Pile de cartes
+   ============================================================ */
+function contenuFiche(o) {
+  const f = FICHES[o];
+  if (!f) return `<div class="blk"><p>Fiche archivée dans Airtable au moment de l'envoi.</p></div>`;
+  const b = (k, v, cls = "") => `<div class="blk ${cls}"><div class="blk-k">${k}</div>${v}</div>`;
+  let h = "";
+  if (f.type === "matin") {
+    h += b("En une phrase", `<p>${esc(f.phrase)}</p>`);
+    h += b("Le problème qu'elle résout", `<p>${esc(f.probleme)}</p>`);
+    h += b("L'intuition", `<p>${esc(f.intuition)}</p>`);
+    if (f.formule) h += b("La formule", `<pre class="formule">${esc(f.formule)}</pre>`);
+    h += b("Le piège", `<p>${esc(f.piege)}</p>`, "blk-piege");
+  } else {
+    h += b("Rappel", `<p>${esc(f.rappel)}</p>`);
+    h += b("Le code", `<pre class="code">${esc(f.code)}</pre>`);
+    h += b("Exercice", `<p>${esc(f.exercice)}</p>`);
+  }
+  const src = SOURCES.notions.find((n) => n.ordre === o);
+  if (src) {
+    const lien = (l, lang) => l ? `<a class="tag" href="${esc(l.url)}" target="_blank" rel="noopener" data-src="${lang}">${ico("i-play")}${lang} · ${esc(l.label)}</a>` : "";
+    h += b("Pour creuser", `<div class="sources">${lien(src.fr, "FR")}${lien(src.en, "EN")}</div>`);
+  }
+  return h;
+}
+
+function carte(o, depth) {
+  const n = notion(o), st = baseStatuts[o];
+  const etiquette = st === "envoyee" ? `Nouvelle · ${n.creneau}` : st === "perdue" ? "Retour de perdue" : "Révision";
+  const d = document.createElement("article");
+  d.className = "card";
+  d.dataset.depth = depth;
+  d.dataset.ordre = o;
+  d.setAttribute("aria-hidden", depth > 0 ? "true" : "false");
+  d.innerHTML = `
+    <div class="card-top">
+      <span class="tag">${ico("i-book")}${n.sprint.id} · ${esc(n.sprint.dom)}</span>
+      <span class="card-num">NOTION ${pad3(o)} / 192</span>
+    </div>
+    <h3>${esc(n.titre)}</h3>
+    <div><span class="tag">${ico(st === "envoyee" ? "i-star" : "i-redo")}${etiquette}${passages[o] ? ` · ${passages[o]}/3 passages` : ""}</span></div>
+    <div class="card-body" tabindex="${depth === 0 ? 0 : -1}" aria-label="Fiche de la notion">${depth === 0 ? contenuFiche(o) : ""}</div>
+    <span class="stamp stamp-ok">Compris</span><span class="stamp stamp-again">À revoir</span><span class="stamp stamp-lost">Perdue</span>`;
+  return d;
+}
+
+let vueDepuis = 0;
+function rendrePile() {
+  const pile = $("#stack");
+  pile.innerHTML = "";
+  fileVue = FILE.filter((o) => !E.faits[o]);
+  document.querySelectorAll(".v-btn").forEach((b) => (b.disabled = fileVue.length === 0));
+  if (fileVue.length === 0) return rendreVide();
+  fileVue.slice(0, 3).reverse().forEach((o, i, arr) => pile.appendChild(carte(o, arr.length - 1 - i)));
+  const top = pile.querySelector('[data-depth="0"]');
+  activerGlisse(top);
+  vueDepuis = performance.now();
+  track("carte_vue", { ordre: +top.dataset.ordre, statut: baseStatuts[top.dataset.ordre] });
+  top.querySelectorAll("[data-src]").forEach((a) => a.addEventListener("click", () => track("source_ouverte", { ordre: +top.dataset.ordre, langue: a.dataset.src })));
+}
+
+function rendreVide() {
+  const gagnes = pointsJour();
+  const pile = $("#stack");
+  pile.innerHTML = `<div class="empty">
+    <span class="tag">${ico("i-flame")}Série : ${serie()} jours</span>
+    <h3>Journée tenue.</h3>
+    <p>${fileTotale()} notions jugées, ${gagnes} points gagnés. Prochaine fiche demain à 7 h 30. Les notions perdues reviennent dans 3 jours, en tête de pile.</p>
+    <p style="margin-top:8px;color:var(--text);font-weight:500">Cette séance, c'était :</p>
+    <div class="feel" role="group" aria-label="Ressenti de la séance">
+      ${["Trop léger", "Juste", "Trop dense"].map((f) => `<button class="btn btn-ghost btn-sm" aria-pressed="${E.ressenti === f}" data-feel="${f}">${f}</button>`).join("")}
+    </div>
+  </div>`;
+  pile.querySelectorAll("[data-feel]").forEach((b) => b.addEventListener("click", () => {
+    E.ressenti = b.dataset.feel; sauver();
+    track("ressenti_seance", { ressenti: E.ressenti, minutes_estimees: Math.round(fileTotale() * 3.5) });
+    rendreVide();
+  }));
+}
+
+function juger(verdict, source) {
+  // Une carte en vol est déjà jugée : on ignore les frappes jusqu'à l'arrivée de la suivante.
+  const top = $('#stack [data-depth="0"]:not([data-vol])');
+  if (!top) return;
+  top.dataset.vol = "1";
+  const o = +top.dataset.ordre;
+  const r = applyVerdict(o, verdict, source);
+  E.faits[o] = verdict;
+  E.gains.push(...r.gains);
+  sauver();
+  track("verdict_donne", {
+    ordre: o, verdict, source, statut_avant: r.avant, passages_avant: r.pAvant, retour_jours: r.jours,
+    duree_carte_s: Math.round((performance.now() - vueDepuis) / 1000),
+    nouvelle: baseStatuts[o] === "envoyee",
+  });
+  toast(r.gains);
+  if (r.pApres === 3) track("notion_ancree", { ordre: o });
+
+  const fin = () => {
+    rendrePile(); rendreHero(); rendreAside();
+    if (journeeTenue()) { track("seance_terminee", { cartes: fileTotale(), points: pointsJour(), serie: serie() }); toast([{ quoi: `jour tenu, série à ${serie()} jours` }]); }
+  };
+  if (reduit) return fin();
+  const dx = verdict === "ok" ? -1 : verdict === "lost" ? 1 : 0, dy = verdict === "again" ? 1 : 0;
+  top.style.transition = "transform .38s cubic-bezier(.4,.0,.6,1), opacity .38s";
+  top.style.transform = `translate(${dx * 140}%, ${dy * 120}%) rotate(${dx * 18}deg)`;
+  top.style.opacity = "0";
+  setTimeout(fin, 360);
+}
+
+/* Glisser : à gauche Compris, vers le bas À revoir, à droite Perdue. */
+const SEUIL_X = 110, SEUIL_Y = 140;
+function activerGlisse(c) {
+  let x0 = 0, y0 = 0, dx = 0, dy = 0, actif = false;
+  const stamps = { ok: c.querySelector(".stamp-ok"), again: c.querySelector(".stamp-again"), lost: c.querySelector(".stamp-lost") };
+  c.addEventListener("pointerdown", (e) => {
+    if (e.target.closest("a, .card-body pre")) return;
+    actif = true; x0 = e.clientX; y0 = e.clientY; c.setPointerCapture(e.pointerId); c.classList.add("dragging");
+  });
+  c.addEventListener("pointermove", (e) => {
+    if (!actif) return;
+    dx = e.clientX - x0; dy = Math.max(0, e.clientY - y0);
+    c.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx / 20}deg)`;
+    stamps.ok.style.opacity = Math.min(1, Math.max(0, -dx / SEUIL_X));
+    stamps.lost.style.opacity = Math.min(1, Math.max(0, dx / SEUIL_X));
+    stamps.again.style.opacity = Math.abs(dx) < 60 ? Math.min(1, dy / SEUIL_Y) : 0;
+  });
+  const fin = () => {
+    if (!actif) return;
+    actif = false; c.classList.remove("dragging");
+    let v = null;
+    if (dx <= -SEUIL_X) v = "ok"; else if (dx >= SEUIL_X) v = "lost"; else if (dy >= SEUIL_Y) v = "again";
+    if (v) juger(v, "glisse");
+    else { c.style.transform = ""; Object.values(stamps).forEach((s) => (s.style.opacity = 0)); }
+    dx = dy = 0;
+  };
+  c.addEventListener("pointerup", fin);
+  c.addEventListener("pointercancel", fin);
+}
+
+/* ============================================================
+   Colonne droite
+   ============================================================ */
+function rendreAside() {
+  const sp = SPRINTS[SPRINT_EN_COURS];
+  $("#pj-title").textContent = sp.projet;
+  $("#pj-due").textContent = `rendu dans ${RENDU_DANS} j`;
+  $("#pj-brief").textContent = "Vos propres données, un test d'hypothèse honnête, et une conclusion qui dit ce que les données ne permettent pas de conclure.";
+  const ul = $("#pj-checks");
+  if (!ul.children.length) {
+    ul.innerHTML = CHECKLIST.map((c, i) => `<li><label><input type="checkbox" data-i="${i}" ${E.cases[i] ? "checked" : ""}><span>${esc(c.t)}</span></label></li>`).join("");
+    ul.addEventListener("change", (e) => {
+      const i = +e.target.dataset.i; E.cases[i] = e.target.checked; sauver();
+      track("projet_etape", { sprint: sp.id, etape: i, cochee: e.target.checked });
+      if (e.target.checked) toast([{ pts: PTS.etape, quoi: "étape du projet" }]);
+      rendreAside(); rendreHero();
+    });
+  }
+  const n = E.cases.filter(Boolean).length;
+  $("#pj-bar").style.width = `${(n / CHECKLIST.length) * 100}%`;
+  $("#pj-count").textContent = `${n} / ${CHECKLIST.length} étapes`;
+
+  const c = compte();
+  const tuiles = [["comprise", "Comprises", "ok"], ["revoir", "À revoir", "again"], ["perdue", "Perdues", "lost"], ["avenir", "À venir", null]];
+  $("#tiles").innerHTML = tuiles.map(([k, lib, v]) => {
+    const nb = k === "avenir" ? c.avenir + c.envoyee : c[k];
+    const pastille = v ? `<span class="mark mark-${v}"><svg><use href="#${VICO[v]}"/></svg></span>` : `<span class="mark" style="border:1.5px solid var(--hair)"></span>`;
+    return `<div class="tile"><div class="tile-n">${nb}</div><div class="tile-k">${pastille}${lib}</div></div>`;
+  }).join("");
+  const total = c.comprise + c.revoir + c.perdue + c.avenir + c.envoyee;
+  $("#integrity").innerHTML = `${ico(total === 192 ? "i-check" : "i-x")} Total ${total} / 192 ${total === 192 ? ": intégrité vérifiée" : ": incohérence"}${c.envoyee ? ` · dont ${c.envoyee} reçues non jugées` : ""}`;
+
+  const ratt = [];
+  for (let o = 1; o <= 192; o++) if (statuts[o] === "revoir" || statuts[o] === "perdue") ratt.push(o);
+  const ordreRetour = (o) => { const r = retours[o] || "aujourd'hui"; return r === "aujourd'hui" ? 0 : r === "demain" ? 1 : parseInt(r.replace(/\D/g, ""), 10); };
+  ratt.sort((a, b) => ordreRetour(a) - ordreRetour(b) || a - b);
+  $("#catchup").innerHTML = ratt.slice(0, 7).map((o) => {
+    const v = STATUT_V[statuts[o]];
+    const quand = E.faits[o] || !FILE.includes(o) ? (retours[o] || "dans 2 j") : "aujourd'hui";
+    return `<li><span class="mark mark-${v}" title="${VLIB[v]}"><svg><use href="#${VICO[v]}"/></svg></span><span class="sr-only">${VLIB[v]} :</span><span class="grow">${pad3(o)} ${esc(TITRES[o - 1])}</span><span class="meta">${quand}</span></li>`;
+  }).join("") || `<li><span class="grow">Rien en attente.</span></li>`;
+
+  const recents = Object.keys(E.faits).map((o) => ({ h: "à l'instant", v: E.faits[o], quoi: `${pad3(o)} ${TITRES[o - 1]}`, src: "dashboard" })).reverse();
+  const items = [...recents, ...flux.map((f) => ({ ...f, v: STATUT_V[f.v] || "ok" }))].slice(0, 6);
+  $("#feed").innerHTML = items.map((f) => `<li><span class="mark mark-${f.v}" title="${VLIB[f.v]}"><svg><use href="#${VICO[f.v]}"/></svg></span><span class="sr-only">${VLIB[f.v]} :</span><span class="grow">${esc(f.quoi)}</span><span class="meta">${esc(f.h)} · ${esc(f.src)}</span></li>`).join("");
+}
+
+/* ============================================================
+   Parcours
+   ============================================================ */
+function etatCase(o) {
+  const s = statuts[o];
+  if (s === "comprise" && passages[o] >= 3) return "ancree";
+  return s;
+}
+const LIB_CASE = { avenir: "À venir", envoyee: "Reçue, à juger", comprise: "Comprise", ancree: "Ancrée, 3 passages", revoir: "À revoir", perdue: "Perdue" };
+
+function rendreParcours() {
+  $("#legend").innerHTML = ["avenir", "envoyee", "comprise", "ancree", "revoir", "perdue"]
+    .map((s) => `<span><i class="cell" data-s="${s}" style="--p:2"></i>${LIB_CASE[s]}</span>`).join("");
+  $("#map").innerHTML = SPRINTS.map((sp, i) => {
+    let ok = 0, ag = 0, lo = 0, cells = "";
+    for (let o = i * 24 + 1; o <= i * 24 + 24; o++) {
+      const e = etatCase(o);
+      if (e === "comprise" || e === "ancree") ok++; if (e === "revoir") ag++; if (e === "perdue") lo++;
+      cells += `<i class="cell" data-s="${e}" style="--p:${passages[o]}" title="${pad3(o)} ${esc(TITRES[o - 1])} : ${LIB_CASE[e]}"></i>`;
+    }
+    const jug = ok + ag + lo;
+    const cls = i === SPRINT_EN_COURS ? "current" : i > SPRINT_EN_COURS ? "locked" : "";
+    const projet = i < SPRINT_EN_COURS ? `<span class="tag">${ico("i-check")}Projet rendu</span>` : i === SPRINT_EN_COURS ? `<span class="tag">${ico("i-flag")}En cours</span>` : `<span class="tag" style="color:var(--muted)">Verrouillé</span>`;
+    return `<div class="map-row ${cls}" ${i === SPRINT_EN_COURS ? 'aria-current="step"' : ""}>
+      <div class="row-name"><b>${sp.id} · ${PALIERS[i]}</b><span>${esc(sp.nom)} · ${esc(sp.sem)}</span></div>
+      <div class="cells" role="img" aria-label="${sp.id} : ${ok} comprises, ${ag} à revoir, ${lo} perdues sur 24">${cells}</div>
+      <div class="row-end"><b>${jug} / 24</b><br>${projet}</div>
+    </div>`;
+  }).join("");
+
+  $("#paliers").innerHTML = SPRINTS.map((sp, i) => {
+    const gagne = i < SPRINT_EN_COURS, enCours = i === SPRINT_EN_COURS;
+    const note = gagne ? "Gagné : projet rendu, 24 notions jugées." : enCours ? `${compteSprint(i)} / 24 notions jugées · projet ${E.cases.filter(Boolean).length}/${CHECKLIST.length}` : `Se débloque avec ${sp.id}.`;
+    return `<div class="palier ${gagne || enCours ? "" : "locked"}"><div class="palier-k">${sp.id}${gagne ? " · gagné" : enCours ? " · en cours" : ""}</div><b>${PALIERS[i]}</b><p>${note}</p>${enCours ? `<div class="bar"><i style="width:${(compteSprint(i) / 24) * 100}%"></i></div>` : ""}</div>`;
+  }).join("");
+
+  const nbPerdues = HIST.reduce((s, h) => s + h.perdues, 0);
+  const anc = ancrees();
+  const BADGES = [
+    { ico: "i-play", t: "Première séance", d: "Le jour 1 a eu lieu.", ok: true },
+    { ico: "i-eye", t: "Lucide", d: `5 notions marquées Perdue sans tricher. ${nbPerdues} à ce jour.`, ok: nbPerdues >= 5 },
+    { ico: "i-redo", t: "Rattrapage", d: "Une notion perdue redevenue comprise.", ok: true },
+    { ico: "i-flame", t: "Sept jours tenus", d: "Une semaine sans file en attente.", ok: serie() >= 7 },
+    { ico: "i-book", t: "Dimanche de révision", d: "Deux dimanches consacrés à la seule révision.", ok: true },
+    { ico: "i-anchor", t: "Ancrage", d: `10 notions sorties du cycle après 3 passages. ${anc} / 10.`, ok: anc >= 10, p: Math.min(1, anc / 10) },
+    { ico: "i-flag", t: "Premier projet rendu", d: "Régression linéaire from scratch, sprint 1.", ok: true },
+    { ico: "i-shield", t: "Sans retard", d: "14 jours sans rattrapage en retard. 8 / 14.", ok: false, p: 8 / 14 },
+    { ico: "i-target", t: "Mi-parcours", d: `96 notions jugées. ${compte().comprise + compte().revoir + compte().perdue} / 96.`, ok: false, p: (compte().comprise + compte().revoir + compte().perdue) / 96 },
+  ];
+  $("#badges").innerHTML = BADGES.map((b) => `<div class="badge ${b.ok ? "" : "locked"}">
+    <span class="badge-ico">${ico(b.ico)}</span>
+    <div style="min-width:0;flex:1"><b>${b.t}</b><span class="sr-only">${b.ok ? " (obtenu)" : " (à obtenir)"}</span><p>${esc(b.d)}</p>${!b.ok && b.p ? `<div class="bar" aria-hidden="true"><i style="width:${b.p * 100}%"></i></div>` : ""}</div>
+  </div>`).join("");
+}
+function compteSprint(i) {
+  let n = 0;
+  for (let o = i * 24 + 1; o <= i * 24 + 24; o++) if (["comprise", "revoir", "perdue"].includes(statuts[o])) n++;
+  return n;
+}
+
+/* ============================================================
+   Prompt (versions conservées dans le navigateur)
+   ============================================================ */
+function rendrePrompt() {
+  const ta = $("#prompt");
+  ta.value = E.prompt ?? PROMPT_ORIGINE;
+  $("#p-ver").textContent = `v${E.version}`;
+  $("#vars").innerHTML = VARIABLES.map((v) => `<button class="tag" data-var="${v}">${v}</button>`).join("");
+}
+function initPrompt() {
+  rendrePrompt();
+  $("#vars").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-var]"); if (!b) return;
+    const ta = $("#prompt"), s = ta.selectionStart, f = ta.selectionEnd;
+    ta.setRangeText(b.dataset.var, s, f, "end"); ta.focus();
+  });
+  $("#p-save").addEventListener("click", () => {
+    E.prompt = $("#prompt").value; E.version++; sauver();
+    $("#p-ver").textContent = `v${E.version}`;
+    $("#p-status").textContent = `Version ${E.version} enregistrée, l'ancienne reste dans l'historique.`;
+    track("prompt_enregistre", { version: E.version, longueur: E.prompt.length });
+  });
+  $("#p-reset").addEventListener("click", () => {
+    $("#prompt").value = PROMPT_ORIGINE;
+    $("#p-status").textContent = "Prompt d'origine rétabli dans l'éditeur. Enregistrer pour l'activer.";
+  });
+}
+
+/* ============================================================
+   Mesure : étoile polaire, garde-fous, plan de réponse
+   ============================================================ */
+function joursMesure() {
+  const jours = HIST.slice(-13).map((h) => ({ ...h }));
+  const auj = FILE.filter((o) => baseStatuts[o] === "envoyee");
+  jours.push({ j: JOUR, recues: auj.length, j24: auj.filter((o) => E.faits[o]).length, min: journeeTenue() ? Math.round(fileTotale() * 3.5) : 0, perdues: auj.filter((o) => E.faits[o] === "lost").length, auj: true });
+  return jours;
+}
+function rendreMesure() {
+  const jours = joursMesure();
+  const rec = jours.reduce((s, d) => s + d.recues, 0), jug = jours.reduce((s, d) => s + d.j24, 0);
+  const ns = Math.round((jug / rec) * 100);
+  $("#ns-v").innerHTML = `${ns}<small> %</small>`;
+  $("#ns-note").innerHTML = `${jug} sur ${rec} notions. Cible 85 %. <span class="state ${ns >= 85 ? "good" : "warn"}"><i></i>${ns >= 85 ? "Dans la cible" : "Sous la cible"}</span>`;
+
+  // Barres : un taux par jour, une seule série, la cible en pointillé.
+  const W = 560, H = 200, padL = 32, padB = 26, bw = (W - padL) / jours.length;
+  let svg = `<svg viewBox="0 0 ${W} ${H + 4}" role="img" aria-label="Taux de notions jugées dans les 24 h, par jour, sur 14 jours">`;
+  [0, 50, 100].forEach((v) => { const y = H - padB - (v / 100) * (H - padB - 10); svg += `<line class="grid-l" x1="${padL}" x2="${W}" y1="${y}" y2="${y}"/><text class="ax" x="${padL - 6}" y="${y + 4}" text-anchor="end">${v}</text>`; });
+  const yT = H - padB - 0.85 * (H - padB - 10);
+  jours.forEach((d, i) => {
+    const x = padL + i * bw + 3, w = Math.max(4, bw - 6), base = H - padB;
+    const dim = d.recues === 0;
+    const taux = dim ? 0 : d.j24 / d.recues, h = Math.max(dim ? 0 : 2, taux * (H - padB - 10));
+    const lib = dim ? `Jour ${d.j} · dimanche, révision seule` : `Jour ${d.j}${d.auj ? " (aujourd'hui)" : ""} · ${d.j24} / ${d.recues} jugées · ${d.min} min`;
+    svg += `<rect class="hit" x="${x - 3}" y="10" width="${w + 6}" height="${base - 10}" tabindex="0" data-tip="${lib}"><title>${lib}</title></rect>`;
+    svg += dim ? `<text class="ax" x="${x + w / 2}" y="${base - 6}" text-anchor="middle">rév.</text>` : `<path class="b" d="M${x},${base} v${-h + 4} q0,-4 4,-4 h${w - 8} q4,0 4,4 v${h - 4} z"/>`;
+    if (i % 2 === 1 || d.auj) svg += `<text class="ax" x="${x + w / 2}" y="${H + 2}" text-anchor="middle">${d.auj ? "auj." : "J" + d.j}</text>`;
+  });
+  // La cible passe au-dessus des barres pour rester lisible.
+  svg += `<line class="target" x1="${padL}" x2="${W}" y1="${yT}" y2="${yT}" pointer-events="none"/>`;
+  svg += `</svg><div class="tip" id="tip"></div><p class="simu" style="margin-top:8px">Barres : part des notions du jour jugées en 24 h. Pointillé : cible 85 %. « rév. » : dimanche, révision seule.</p>`;
+  $("#ns-chart").innerHTML = svg;
+  const tip = $("#tip"), box = $("#ns-chart");
+  box.querySelectorAll(".hit").forEach((r) => {
+    const show = () => { const b = r.getBoundingClientRect(), c = box.getBoundingClientRect(); tip.textContent = r.dataset.tip; tip.style.left = `${Math.min(Math.max(b.left - c.left + b.width / 2, 90), c.width - 90)}px`; tip.style.top = `${b.top - c.top + 20}px`; tip.style.opacity = 1; };
+    r.addEventListener("mouseenter", show); r.addEventListener("focus", show);
+    r.addEventListener("mouseleave", () => (tip.style.opacity = 0)); r.addEventListener("blur", () => (tip.style.opacity = 0));
+  });
+  $("#ns-table").innerHTML = `<table class="t"><thead><tr><th>Jour</th><th>Reçues</th><th>Jugées en 24 h</th><th>Minutes</th></tr></thead><tbody>${jours.map((d) => `<tr><td>${d.auj ? "Aujourd'hui" : "Jour " + d.j}</td><td>${d.recues || "dimanche"}</td><td>${d.recues ? d.j24 : "-"}</td><td>${d.min}</td></tr>`).join("")}</tbody></table>`;
+
+  const tenus = jours.filter((d) => d.min > 0), totMin = tenus.reduce((s, d) => s + d.min, 0);
+  const moyMin = Math.round(totMin / tenus.length);
+  const perd = jours.reduce((s, d) => s + d.perdues, 0), tauxP = Math.round((perd / jug) * 100);
+  const enRetard = 0;
+  const ratio = 0.78;
+  const etat = (bon, moyen) => bon ? `<span class="state good"><i></i>Dans la cible</span>` : moyen ? `<span class="state warn"><i></i>À surveiller</span>` : `<span class="state bad"><i></i>Alerte</span>`;
+  $("#guards").innerHTML = `<thead><tr><th>Garde-fou</th><th>Valeur</th><th>Cible</th><th>État</th><th>Ce qu'il protège</th></tr></thead><tbody>
+    <tr><td>Heures sur l'outil ÷ heures de séance</td><td class="num">${ratio.toFixed(2).replace(".", ",")}</td><td>≤ 0,25</td><td>${etat(ratio <= 0.25, ratio <= 0.5)}</td><td>Le risque n°1 : construire CORTEX au lieu de le suivre. <span class="simu">Simulé. Source prévue : commits du dépôt CORTEX et durée des séances.</span></td></tr>
+    <tr><td>Part de verdicts Perdue</td><td class="num">${tauxP} %</td><td>10 à 40 %</td><td>${etat(tauxP >= 10 && tauxP <= 40, true)}</td><td>Sous 10 % plusieurs jours : verdicts complaisants. Au-dessus de 40 % : rythme trop rapide.</td></tr>
+    <tr><td>Durée moyenne d'une séance</td><td class="num">${moyMin} min</td><td>≤ 45 min</td><td>${etat(moyMin <= 45, moyMin <= 55)}</td><td>La cadence de 45 min par jour, tenable sur 16 semaines.</td></tr>
+    <tr><td>Révisions en retard</td><td class="num">${enRetard}</td><td>≤ 5</td><td>${etat(enRetard <= 5, enRetard <= 10)}</td><td>Une file de rattrapage qui gonfle finit par décourager.</td></tr>
+  </tbody>`;
+  const casesN = E.cases.filter(Boolean).length;
+  const tenus7 = jours.slice(-7).filter((d) => d.min > 0 || d.recues === 0).length;
+  $("#inputs").innerHTML = `<thead><tr><th>Indicateur</th><th>Valeur</th><th>Annonce</th></tr></thead><tbody>
+    <tr><td>Jours tenus sur 7</td><td class="num">${tenus7} / 7</td><td>L'étoile polaire de la semaine suivante.</td></tr>
+    <tr><td>Révisions échues traitées le jour même</td><td class="num">${journeeTenue() ? "100" : Math.round(((fileTotale() - restantes()) / fileTotale()) * 100)} %</td><td>Une file de rattrapage qui reste courte.</td></tr>
+    <tr><td>Étapes de projet cochées à J-${RENDU_DANS}</td><td class="num">${casesN} / ${CHECKLIST.length}</td><td>Un projet rendu le samedi, donc un palier gagné.</td></tr>
+  </tbody>`;
+  $("#response").innerHTML = `<thead><tr><th>Si…</th><th>Alors</th></tr></thead><tbody>
+    <tr><td>Étoile polaire sous 85 % deux semaines</td><td>Passer à une notion par jour pendant une semaine, sans culpabilité.</td></tr>
+    <tr><td>Ratio outil ÷ séance au-dessus de 0,25</td><td>Geler le dashboard. Le programme tourne en manuel jusqu'au dimanche.</td></tr>
+    <tr><td>Perdues sous 10 % pendant 5 jours</td><td>Expliquer à voix haute une notion « Compris » tirée au hasard.</td></tr>
+    <tr><td>« Trop dense » trois séances de suite</td><td>Raccourcir les fiches via le prompt, pas le programme.</td></tr>
+  </tbody>`;
+  $("#spec").innerHTML = `<thead><tr><th>Événement</th><th>Répond à</th></tr></thead><tbody>
+    <tr><td><code>verdict_donne</code></td><td>Est-ce jugé, en combien de temps, et par quel chemin (glisse, bouton, clavier, Discord) ?</td></tr>
+    <tr><td><code>carte_vue</code></td><td>Combien de temps reste-t-on sur une fiche avant de juger ?</td></tr>
+    <tr><td><code>seance_terminee</code></td><td>La journée est-elle tenue ? Alimente la série.</td></tr>
+    <tr><td><code>ressenti_seance</code></td><td>Le rythme est-il juste ? Le seul signal qualitatif, un clic.</td></tr>
+    <tr><td><code>projet_etape</code></td><td>Le projet avance-t-il avant le samedi ?</td></tr>
+    <tr><td><code>source_ouverte</code></td><td>Les liens servent-ils, en français ou en anglais ?</td></tr>
+    <tr><td><code>prompt_enregistre</code></td><td>Combien de temps part dans le réglage de l'outil ?</td></tr>
+  </tbody>`;
+  rendreEvts();
+}
+function rendreEvts() {
+  const l = E.evts.slice(-12).reverse();
+  $("#evts").innerHTML = l.length ? l.map((e) => `<li><span class="evt"><b>${e.nom}</b> ${esc(new Date(e.t).toLocaleTimeString("fr-FR"))} · ${esc(JSON.stringify(e.props))}</span></li>`).join("") : `<li><span class="grow">Aucun événement. Juge une carte dans Révision.</span></li>`;
+}
+
+/* ============================================================
+   Onglets, clavier, thème
+   ============================================================ */
+const VUES = { "t-revision": "v-revision", "t-parcours": "v-parcours", "t-prompt": "v-prompt", "t-mesure": "v-mesure" };
+function ouvrir(id, focus) {
+  Object.entries(VUES).forEach(([t, v]) => {
+    const on = t === id, tab = document.getElementById(t);
+    tab.setAttribute("aria-selected", on); tab.tabIndex = on ? 0 : -1;
+    document.getElementById(v).hidden = !on;
+  });
+  if (id === "t-parcours") rendreParcours();
+  if (id === "t-mesure") rendreMesure();
+  if (focus) document.getElementById(id).focus();
+  track("onglet_ouvert", { onglet: id.slice(2) });
+  window.scrollTo({ top: 0 });
+}
+document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => ouvrir(t.id)));
+$(".tabs").addEventListener("keydown", (e) => {
+  const ids = Object.keys(VUES), i = ids.indexOf(document.activeElement.id);
+  if (i < 0) return;
+  if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); e.stopPropagation(); ouvrir(ids[(i + (e.key === "ArrowRight" ? 1 : ids.length - 1)) % ids.length], true); }
+});
+document.querySelectorAll(".v-btn").forEach((b) => b.addEventListener("click", () => juger(b.dataset.v, "bouton")));
+document.addEventListener("keydown", (e) => {
+  if ($("#v-revision").hidden || e.target.closest?.("textarea, input, .tabs") || e.metaKey || e.ctrlKey || e.altKey) return;
+  const v = { ArrowLeft: "ok", ArrowDown: "again", ArrowRight: "lost" }[e.key];
+  if (v && fileVue.length) { e.preventDefault(); juger(v, "clavier"); }
+});
+$("#go").addEventListener("click", (e) => {
+  if (journeeTenue()) { e.preventDefault(); ouvrir("t-parcours"); return; }
+  e.preventDefault();
+  $("#pile").scrollIntoView({ behavior: reduit ? "auto" : "smooth" });
+  const b = $('#stack [data-depth="0"] .card-body'); if (b) b.focus({ preventScroll: true });
+  track("seance_ouverte", { restantes: restantes() });
+});
+$("#ns-toggle").addEventListener("click", (e) => {
+  const t = $("#ns-table"), open = t.hidden;
+  t.hidden = !open; $("#ns-chart").hidden = open;
+  e.target.textContent = open ? "Voir le graphique" : "Voir en tableau";
+  e.target.setAttribute("aria-expanded", open);
+});
+$("#evt-clear").addEventListener("click", () => {
+  try { localStorage.removeItem(CLE); } catch (e) {}
+  location.reload();
+});
+function appliquerTheme(t) {
+  if (t) document.documentElement.dataset.theme = t;
+  const sombre = (document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")) === "dark";
+  $("#theme use").setAttribute("href", sombre ? "#i-sun" : "#i-moon");
+}
+$("#theme").addEventListener("click", () => {
+  const sombre = (document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")) === "dark";
+  const t = sombre ? "light" : "dark";
+  try { localStorage.setItem("cortex.theme", t); } catch (e) {}
+  appliquerTheme(t);
+});
+try { appliquerTheme(localStorage.getItem("cortex.theme")); } catch (e) { appliquerTheme(null); }
+
+/* ============================================================
+   Démarrage : rejoue les verdicts de la démo, puis rend
+   ============================================================ */
+Object.entries(E.faits).forEach(([o, v]) => applyVerdict(+o, v, "rejeu"));
+rendreHero();
+rendrePile();
+rendreAside();
+initPrompt();
+</script>
+</body>
+</html>
